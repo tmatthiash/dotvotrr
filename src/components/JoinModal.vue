@@ -56,10 +56,10 @@ export default {
     }
   },
   methods: {
-    checkFormValidity() {      
+    checkFormValidity() {
       this.nameState = this.userName.length !== 0 ? true : false;
       this.roomNumberState = this.roomNumber.length === 4 ? true : false;
-      const valid = (this.nameState && this.roomNumberState);
+      const valid = this.nameState && this.roomNumberState;
       return valid;
     },
     handleOk(bvModalEvt) {
@@ -74,13 +74,18 @@ export default {
         return;
       }
       axios
-        .get(`http://localhost:3000/roomNumber/${this.roomNumber}`)
+        .get(`http://localhost:3000/NewRoom/${this.roomNumber}`)
         .then(res => {
           console.log("loaded existing room");
-          console.log(res.data);
+          this.setRoomInfo(res.data.roomNumber);
         });
 
       this.closeModal();
+    },
+    setRoomInfo(roomNumber) {
+      this.$store.commit("setRoom", roomNumber);
+      this.$store.commit("setUserName", this.userName);
+      this.$router.push({ name: "Room" });
     },
     handleCancel(evt) {
       evt.preventDefault();
