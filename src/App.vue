@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
+    <div id="padding"/>
     <router-view />
   </div>
 </template>
@@ -15,6 +16,14 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* margin-top:20px; */
+  /* padding-top: 20px; */
+  height:100vh;
+  background-color: orange;
+}
+
+#padding {
+  height: 20px;
 }
 
 #nav {
