@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const PORT = 3000;
+const { RoomStatuses } = require("../enums");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,6 +22,7 @@ roomRoutes.route("/").post((req, res) => {
     adminName,
     votesPerPerson,
     roomNumber,
+    roomStatus: RoomStatuses.addingOptions,
     options: []
   };
   Rooms.push(newRoom);
@@ -62,7 +64,9 @@ io.on("connection", function(socket) {
     console.log("joining room: ", room);
     socket.join(room);
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === room);
-    io.to(room).emit("UPDATED_OPTIONS", foundRoom.options);
+    if (foundRoom) {
+      io.to(room).emit("UPDATED_OPTIONS", foundRoom.options);
+    }
   });
 
   socket.on("ADD_OPTION", function(data) {

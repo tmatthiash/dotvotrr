@@ -1,5 +1,6 @@
 <template>
   <div class="NewRoom">
+    <HomeButton />
     <b-card title="Create New Room" id="cardNew">
       <b-form @submit="onSubmit" v-if="show">
         <div class="form-inputs">
@@ -32,6 +33,7 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
+import HomeButton from "../components/atoms/HomeButton.vue";
 
 export default {
   name: "NewRoom",
@@ -45,6 +47,9 @@ export default {
       voteNumbers: [1, 2, 3, 4, 5, 6, 7],
       show: true
     };
+  },
+  components: {
+    HomeButton
   },
   methods: {
     onSubmit(evt) {

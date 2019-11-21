@@ -1,27 +1,18 @@
 <template>
   <div class="Room">
-    <b-card :title="`Room Number: ${roomNumber}`" id="cardNew">
-      <div class="room-subtitle">Hi {{userName}}, add options for: {{roomName}}</div>
-      <div class="option-info">
-        <div class="option-input">
-          <b-form @submit="onSubmit">
-            <b-form-group
-              :state="optionState"
-              label="Add an option"
-              label-for="option-input"
-              invalid-feedback="Cannot be blank"
-            >
-              <b-form-input id="option-input" v-model="newOption" :state="optionState" required></b-form-input>
-            </b-form-group>
-            <b-button type="submit" variant="primary">Submit</b-button>
-          </b-form>
+    <HomeButton />
+    <b-card id="cardNew">
+      <div class="topStuffHolder">
+        <div>
+          <H4>Room Number: {{roomNumber}}</H4>
+          <div            
+            class="room-subtitle"
+          >Hi {{userName}}, add options for: {{roomName}}</div>
         </div>
-        <div class="option-input">
-          <div class="option-title">{{optionList.length}} Options added so far</div>
-          <b-list-group>
-            <b-list-group-item v-for="(option, index) in optionList" :key="index">{{option}}</b-list-group-item>
-          </b-list-group>
-        </div>
+        <creator-tools v-if="adminName===userName" :roomNumber="roomNumber" />
+      </div>
+      <div v-if="roomStatus===RoomStatuses.addingOptions">
+        <OptionsInputs :roomNumber="roomNumber" :optionList="optionList" />
       </div>
     </b-card>
   </div>
@@ -32,6 +23,10 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 import io from "socket.io-client";
+import HomeButton from "../components/atoms/HomeButton.vue";
+import OptionsInputs from "../components/Molecules/OptionsInputs.vue";
+import RoomStatuses from "../../enums";
+import CreatorTools from "../components/Molecules/CreatorTools.vue";
 
 export default {
   name: "Room",
@@ -39,34 +34,26 @@ export default {
     ...mapGetters({
       roomNumber: "getRoomNumber",
       userName: "getUserName"
-    })
+    }),
+    RoomStatuses() {
+      return RoomStatuses.RoomStatuses;
+    }
   },
   data() {
     return {
       roomName: "",
-      newOption: "",
-      optionState: null,
+      socket: io("localhost:3000"),
       optionList: [],
-      socket: io("localhost:3000")
+      roomStatus: null,
+      adminName: ""
     };
   },
+  components: {
+    OptionsInputs,
+    HomeButton,
+    CreatorTools
+  },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      if (this.newOption.length === 0) {
-        this.optionState = false;
-        return;
-      }
-      console.log('submitting')
-      const { roomNumber, newOption } = this;
-      // axios.post("http://localhost:3000/options/add/", { roomNumber, newOption }).then(res => {
-      //   console.log(res.data);
-      // });
-      this.socket.emit("ADD_OPTION", {
-        roomNumber,
-        newOption
-      });
-    },
     getRoomInfo() {
       console.log("room ", this.getRoomNumber);
       axios
@@ -75,6 +62,8 @@ export default {
           console.log("loaded existing room");
           console.log(res.data);
           this.roomName = res.data.RoomName;
+          this.roomStatus = res.data.roomStatus;
+          this.adminName = res.data.adminName;
         });
     }
   },
@@ -92,32 +81,18 @@ export default {
 #cardNew {
   margin: 40px;
   border-color: black;
-
   border-width: 2px;
   border-radius: 0.25rem;
 }
-.form-inputs {
-  text-align: left;
-}
-.form-inputs {
-  padding: 1.7rem;
-}
-.option-info {
+.topStuffHolder {
+  padding-bottom: 15px;
   display: flex;
-  width: 100%;
-  justify-content: space-evenly;
+  flex-grow: 1;
+  border-bottom: 2px solid #ccc9c9;
+  margin-bottom: 15px;
 }
-.option-input {
-  width: 40%;
-}
-.room-subtitle {
-  padding-bottom: 2rem;
-}
-.option-title {
-  padding-bottom: 1rem;
-  font-weight: 700;
-}
-.d-block {
-  font-weight: 700;
+.topStuffHolder > div{
+
+  flex-grow: 1;
 }
 </style>
