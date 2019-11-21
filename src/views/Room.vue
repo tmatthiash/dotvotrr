@@ -31,6 +31,7 @@
 // @ is an alias to /src
 import axios from "axios";
 import { mapGetters } from "vuex";
+import io from "socket.io-client";
 
 export default {
   name: "Room",
@@ -45,7 +46,8 @@ export default {
       roomName: "",
       newOption: "",
       optionState: null,
-      optionList: ["one", "two", "three"]
+      optionList: [],
+      socket: io("localhost:3000")
     };
   },
   methods: {
@@ -55,9 +57,14 @@ export default {
         this.optionState = false;
         return;
       }
+      console.log('submitting')
       const { roomNumber, newOption } = this;
-      axios.post("http://localhost:3000/options/add/", { roomNumber, newOption }).then(res => {
-        console.log(res.data);
+      // axios.post("http://localhost:3000/options/add/", { roomNumber, newOption }).then(res => {
+      //   console.log(res.data);
+      // });
+      this.socket.emit("ADD_OPTION", {
+        roomNumber,
+        newOption
       });
     },
     getRoomInfo() {
@@ -73,6 +80,10 @@ export default {
   },
   mounted() {
     this.getRoomInfo();
+    this.socket.emit("join", this.roomNumber);
+    this.socket.on("UPDATED_OPTIONS", data => {
+      this.optionList = data;
+    });
   }
 };
 </script>

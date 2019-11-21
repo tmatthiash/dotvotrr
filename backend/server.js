@@ -24,14 +24,11 @@ roomRoutes.route("/").post((req, res) => {
     options: []
   };
   Rooms.push(newRoom);
-  console.log("New Room", newRoom);
-  console.log("Number of Rooms: ", Rooms.length);
   res.json(newRoom);
 });
 roomRoutes.route("/:roomNumber").get((req, res) => {
   const roomNumber = parseInt(req.params.roomNumber);
   const foundRoom = Rooms.find(room => room.roomNumber === roomNumber);
-  console.log("found", foundRoom);
   res.json(foundRoom);
 });
 
@@ -55,6 +52,34 @@ optionsRoute.route("/add").post((req, res) => {
   res.json("Success");
 });
 
-app.listen(PORT, function() {
+const server = app.listen(PORT, function() {
   console.log("Server is running on Port: " + PORT);
+});
+
+const io = require("socket.io")(server);
+io.on("connection", function(socket) {
+  socket.on("join", function(room) {
+    console.log("joining room: ", room);
+    socket.join(room);
+    const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === room);
+    io.to(room).emit("UPDATED_OPTIONS", foundRoom.options);
+  });
+
+  socket.on("ADD_OPTION", function(data) {
+    console.log("adding option");
+    const { newOption, roomNumber } = data;
+    const foundRoom = Rooms.find(
+      room => room.roomNumber === parseInt(roomNumber)
+    );
+    console.log("old Options", foundRoom.options);
+    const updatedOptions = [...foundRoom.options, newOption];
+    const updatedRoom = {
+      ...foundRoom,
+      options: updatedOptions
+    };
+    Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
+    Rooms.push(updatedRoom);
+    console.log("UpdatedOptions", updatedOptions);
+    io.to(roomNumber).emit("UPDATED_OPTIONS", updatedOptions);
+  });
 });
