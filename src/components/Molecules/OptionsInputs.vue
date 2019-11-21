@@ -51,6 +51,7 @@ export default {
         roomNumber,
         newOption
       });
+      this.newOption = "";
     }
   }
 };

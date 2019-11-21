@@ -71,7 +71,7 @@ export default {
     this.getRoomInfo();
     this.socket.emit("join", this.roomNumber);
     this.socket.on("UPDATED_OPTIONS", data => {
-      this.optionList = data;
+      this.optionList = data;      
     });
   }
 };
