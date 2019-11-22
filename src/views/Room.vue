@@ -5,14 +5,15 @@
       <div class="topStuffHolder">
         <div>
           <H4>Room Number: {{roomNumber}}</H4>
-          <div            
-            class="room-subtitle"
-          >Hi {{userName}}, add options for: {{roomName}}</div>
+          <div class="room-subtitle">Hi {{userName}}, add options for: {{roomName}}</div>
         </div>
         <creator-tools v-if="adminName===userName" :roomNumber="roomNumber" />
       </div>
       <div v-if="roomStatus===RoomStatuses.addingOptions">
         <OptionsInputs :roomNumber="roomNumber" :optionList="optionList" />
+      </div>
+      <div v-if="roomStatus===RoomStatuses.dotVoting">
+        <VotingList :roomNumber="roomNumber" :optionList="optionList" />
       </div>
     </b-card>
   </div>
@@ -27,6 +28,7 @@ import HomeButton from "../components/atoms/HomeButton.vue";
 import OptionsInputs from "../components/Molecules/OptionsInputs.vue";
 import RoomStatuses from "../../enums";
 import CreatorTools from "../components/Molecules/CreatorTools.vue";
+import VotingList from "../components/Molecules/VotingList.vue";
 
 export default {
   name: "Room",
@@ -51,7 +53,8 @@ export default {
   components: {
     OptionsInputs,
     HomeButton,
-    CreatorTools
+    CreatorTools,
+    VotingList
   },
   methods: {
     getRoomInfo() {
@@ -69,9 +72,17 @@ export default {
   },
   mounted() {
     this.getRoomInfo();
-    this.socket.emit("join", this.roomNumber);
+    const { roomNumber, userName } = this;
+    this.socket.emit("join", { roomNumber, userName });
     this.socket.on("UPDATED_OPTIONS", data => {
-      this.optionList = data;      
+      this.optionList = data;
+    });
+    this.socket.on("SET_ROOM_STATUS", data => {
+      this.roomStatus = data;
+    });
+    this.socket.on("FORCE_NAME_CHANGE", data => {
+      console.log("force change", data)
+      this.$store.commit("setUserName", data);
     });
   }
 };
@@ -91,8 +102,7 @@ export default {
   border-bottom: 2px solid #ccc9c9;
   margin-bottom: 15px;
 }
-.topStuffHolder > div{
-
+.topStuffHolder > div {
   flex-grow: 1;
 }
 </style>
