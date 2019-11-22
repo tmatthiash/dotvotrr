@@ -130,6 +130,6 @@ io.on("connection", function(socket) {
     }
     Rooms = Rooms.filter(rm => rm.roomNumber !== data.roomNumber);
     Rooms.push(updatedRoom);
-    io.to(data.roomNumber).emit("SET_ROOM_STATUS", updatedRoom.dotVoting);
+    io.to(data.roomNumber).emit("SET_ROOM_STATUS", updatedRoom.roomStatus);
   });
 });
