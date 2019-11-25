@@ -151,6 +151,7 @@ export default {
 .topStuffHolder {
   padding-bottom: 15px;
   display: flex;
+  flex-wrap: wrap;
   flex-grow: 1;
   border-bottom: 2px solid #ccc9c9;
   margin-bottom: 15px;

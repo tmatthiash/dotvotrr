@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <TopBanner />
+
     <b-row>
       <b-col lg="6" class="pb-2">
         <router-link to="/NewRoom">
@@ -10,7 +12,6 @@
         <b-button size="lg" @click="openModal">Join A Voting Room</b-button>
       </b-col>
     </b-row>
-    <TopBanner />
     <!-- <JoinModal ref="joinModal"/> -->
     <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal" />
   </div>
@@ -61,5 +62,14 @@ li {
 }
 a {
   color: #42b983;
+}
+.btn-lg {
+  background-color: #231651;
+  color: white;
+  border-width: 2px;
+}
+.btn-lg:hover {
+  background-color: #322074;
+  color: white;
 }
 </style>

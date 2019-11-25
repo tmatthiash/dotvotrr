@@ -23,7 +23,7 @@
 }
 
 #padding {
-  height: 20px;
+  height: 2em;
 }
 
 #nav {

@@ -15,6 +15,10 @@ export default {
 
 <style scoped>
   .jumbotron{
-    background-color: white;
+    background-color: #231651;
+    border-width: 5px 0px;
+    border-style: solid;
+    border-color:gray;
+    color: white;
   }
 </style>

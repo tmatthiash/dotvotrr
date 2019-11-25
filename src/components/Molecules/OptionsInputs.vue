@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       newOption: "",
-      optionState: null,      
+      optionState: null,
       socket: io("localhost:3000")
     };
   },
@@ -70,7 +70,10 @@ export default {
   justify-content: space-evenly;
 }
 .option-input {
-  width: 40%;
+  margin-left: 1em;
+  margin-right: 1em;
+  width: 100%;
+  min-width: 150px;
 }
 .room-subtitle {
   padding-bottom: 2rem;
@@ -81,5 +84,13 @@ export default {
 }
 .d-block {
   font-weight: 700;
+}
+@media (max-width: 400px) {
+    .option-info {
+    flex-wrap: wrap-reverse;
+  }
+  .option-input {
+    margin-top:1em;
+  }
 }
 </style>
