@@ -63,9 +63,9 @@ const resultBuilder = roomNumber => {
   }
 
   const combinedVotes = foundRoom.users.reduce((accumulator, currentValue) => {
-    const retValue = [accumulator, ...currentValue.votes];
+    const retValue = accumulator.concat(currentValue.votes);
     return retValue;
-  });
+  }, []);
 
   return foundRoom.options
     .map(opt => {
@@ -179,19 +179,24 @@ io.on("connection", function(socket) {
     const { roomNumber, option, UUID } = data;
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === roomNumber);
     if (!foundRoom) {
+      console.log("no room found");
       return;
     }
     const foundUser = foundRoom.users.find(u => u.UUID === UUID);
     if (!foundUser) {
+      console.log("no user");
+
       return;
     }
     if (foundUser.votes.length >= foundRoom.votesPerPerson) {
+      console.log("too many votes");
+
       return;
     }
     const newVotes = [...foundUser.votes, option];
     const newUser = { ...foundUser, votes: newVotes };
     const filteredUsers = foundRoom.users.filter(u => u.UUID !== UUID);
-    const updatedUsers = [filteredUsers, newUser];
+    const updatedUsers = [...filteredUsers, newUser];
     const newRoom = {
       ...foundRoom,
       users: updatedUsers,

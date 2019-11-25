@@ -12,20 +12,18 @@
     </b-row>
     <TopBanner />
     <!-- <JoinModal ref="joinModal"/> -->
-    <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal"/>
-    <h1>{{ msg }}</h1>
+    <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal" />
   </div>
 </template>
 
 <script>
 import TopBanner from "./TopBanner.vue";
-import JoinModal from "./JoinModal.vue"
+import JoinModal from "./JoinModal.vue";
 
 export default {
   name: "Welcome",
   data() {
     return {
-      msg: "Test prop",
       isModalOpen: false
     };
   },
@@ -33,14 +31,14 @@ export default {
     TopBanner,
     JoinModal
   },
-  methods:{
-    openModal(){
-      console.log('opening');
+  methods: {
+    openModal() {
+      console.log("opening");
       this.isModalOpen = true;
       // this.$refs.joinModal.show()
       // this.$refs['joinModal'].show()
     },
-    closeModal(){
+    closeModal() {
       this.isModalOpen = false;
     }
   }

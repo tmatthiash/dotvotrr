@@ -12,7 +12,9 @@ export default new Vuex.Store({
   state: {
     roomNumber: null,
     userName: null,
-    UUID: null
+    UUID: null,
+    optionList: [],
+    resultList: []
   },
   mutations: {
     setRoom(state, payload) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     setUUID(state, payload) {
       state.UUID = payload;
+    },
+    setOptionList(state, payload) {
+      state.optionList = payload;
+    },
+    setResultList(state, payload) {
+      state.resultList = payload;
     }
   },
   actions: {},
@@ -36,6 +44,12 @@ export default new Vuex.Store({
     },
     getUUID: state => {
       return state.UUID;
+    },
+    getOptionList: state => {
+      return state.optionList;
+    },
+    getResultList: state => {
+      return state.resultList;
     }
   },
   plugins: [vuexLocal.plugin]

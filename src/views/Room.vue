@@ -61,7 +61,9 @@ export default {
     ...mapGetters({
       roomNumber: "getRoomNumber",
       userName: "getUserName",
-      UUID: "getUUID"
+      UUID: "getUUID",
+      optionList: "getOptionList",
+      resultList: "getResultList"
     }),
     RoomStatuses() {
       return RoomStatuses.RoomStatuses;
@@ -71,14 +73,12 @@ export default {
     return {
       roomName: "",
       socket: io("localhost:3000"),
-      optionList: [],
       roomStatus: null,
       votesPerPerson: 3,
       adminName: "",
       newUUID: null,
       totalVotes: 0,
-      userCount: 1,
-      resultList: []
+      userCount: 1
     };
   },
   components: {
@@ -119,7 +119,7 @@ export default {
     const { roomNumber, userName } = this;
     this.socket.emit("join", { roomNumber, userName, effectiveUUID });
     this.socket.on("UPDATED_OPTIONS", data => {
-      this.optionList = data;
+      this.$store.commit("setOptionList", data);
     });
     this.socket.on("SET_ROOM_STATUS", data => {
       this.roomStatus = data;
@@ -135,7 +135,7 @@ export default {
       this.userCount = data;
     });
     this.socket.on("UPDATE_RESULTS", data => {
-      this.resultList = data;
+      this.$store.commit("setResultList", data);
     });
   }
 };
