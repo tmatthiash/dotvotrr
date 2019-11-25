@@ -1,6 +1,7 @@
 const RoomStatuses = {
   addingOptions: "ADDING_OPTIONS",
-  dotVoting: "DOT_VOTING"
+  dotVoting: "DOT_VOTING",
+  results: "RESULTS"
 };
 
 // optionList = [

@@ -11,7 +11,8 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
   state: {
     roomNumber: null,
-    userName: null
+    userName: null,
+    UUID: null
   },
   mutations: {
     setRoom(state, payload) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     setUserName(state, payload) {
       state.userName = payload;
+    },
+    setUUID(state, payload) {
+      state.UUID = payload;
     }
   },
   actions: {},
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     },
     getUserName: state => {
       return state.userName;
+    },
+    getUUID: state => {
+      return state.UUID;
     }
   },
   plugins: [vuexLocal.plugin]

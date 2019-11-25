@@ -24,7 +24,8 @@ roomRoutes.route("/").post((req, res) => {
     roomNumber,
     roomStatus: RoomStatuses.addingOptions,
     options: [],
-    users: []
+    users: [],
+    totalVotes: 0
   };
   Rooms.push(newRoom);
   res.json(newRoom);
@@ -55,6 +56,27 @@ optionsRoute.route("/add").post((req, res) => {
   res.json("Success");
 });
 
+const resultBuilder = roomNumber => {
+  const foundRoom = Rooms.find(room => room.roomNumber === roomNumber);
+  if (!foundRoom) {
+    return;
+  }
+
+  const combinedVotes = foundRoom.users.reduce((accumulator, currentValue) => {
+    const retValue = [accumulator, ...currentValue.votes];
+    return retValue;
+  });
+
+  return foundRoom.options
+    .map(opt => {
+      return {
+        name: opt,
+        count: combinedVotes.filter(cv => cv === opt).length
+      };
+    })
+    .sort((a, b) => a.count < b.count);
+};
+
 const server = app.listen(PORT, function() {
   console.log("Server is running on Port: " + PORT);
 });
@@ -62,11 +84,17 @@ const server = app.listen(PORT, function() {
 const io = require("socket.io")(server);
 io.on("connection", function(socket) {
   socket.on("join", function(data) {
-    const { roomNumber, userName } = data;
+    const { roomNumber, userName, effectiveUUID } = data;
     console.log("joining room: ", roomNumber);
     socket.join(roomNumber);
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === roomNumber);
-    if (foundRoom) {
+
+    if (!foundRoom) {
+      return;
+    }
+
+    const foundUser = foundRoom.users.find(u => u.UUID === effectiveUUID);
+    if (!foundUser) {
       let isNameGood = false;
       let nameBuilder = userName;
       let i = 2;
@@ -81,12 +109,17 @@ io.on("connection", function(socket) {
         }
       }
 
-      const updatedUsers = [...foundRoom.users, { name: nameBuilder }];
+      const updatedUsers = [
+        ...foundRoom.users,
+        { name: nameBuilder, UUID: effectiveUUID, votes: [] }
+      ];
       const updatedRoom = { ...foundRoom, users: updatedUsers };
       Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
       Rooms.push(updatedRoom);
       console.log("User ", nameBuilder, " Room ", roomNumber);
+
       io.to(roomNumber).emit("UPDATED_OPTIONS", foundRoom.options);
+      io.to(roomNumber).emit("UPDATED_USER_COUNT", updatedUsers.length);
       if (nameBuilder !== userName) {
         console.log("emitting ", nameBuilder);
         socket.emit("FORCE_NAME_CHANGE", nameBuilder);
@@ -127,9 +160,47 @@ io.on("connection", function(socket) {
         ...foundRoom,
         roomStatus: RoomStatuses.dotVoting
       };
+    } else if (foundRoom.roomStatus === RoomStatuses.dotVoting) {
+      updatedRoom = {
+        ...foundRoom,
+        roomStatus: RoomStatuses.results
+      };
+      const theResults = resultBuilder(data.roomNumber);
+      io.to(data.roomNumber).emit("UPDATE_RESULTS", theResults);
+    } else {
+      return;
     }
     Rooms = Rooms.filter(rm => rm.roomNumber !== data.roomNumber);
     Rooms.push(updatedRoom);
     io.to(data.roomNumber).emit("SET_ROOM_STATUS", updatedRoom.roomStatus);
+  });
+
+  socket.on("ADD_VOTE", function(data) {
+    const { roomNumber, option, UUID } = data;
+    const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === roomNumber);
+    if (!foundRoom) {
+      return;
+    }
+    const foundUser = foundRoom.users.find(u => u.UUID === UUID);
+    if (!foundUser) {
+      return;
+    }
+    if (foundUser.votes.length >= foundRoom.votesPerPerson) {
+      return;
+    }
+    const newVotes = [...foundUser.votes, option];
+    const newUser = { ...foundUser, votes: newVotes };
+    const filteredUsers = foundRoom.users.filter(u => u.UUID !== UUID);
+    const updatedUsers = [filteredUsers, newUser];
+    const newRoom = {
+      ...foundRoom,
+      users: updatedUsers,
+      totalVotes: foundRoom.totalVotes + 1
+    };
+    Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
+    Rooms.push(newRoom);
+    socket.emit("UPDATE_OWN_VOTES", newVotes);
+
+    io.to(roomNumber).emit("UPDATE_TOTAL_VOTES", newRoom.totalVotes);
   });
 });
