@@ -2,13 +2,19 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const PORT = 3000;
 const { RoomStatuses } = require("../enums");
+const PORT = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 let Rooms = [];
+
+app.use("/", express.static("../dist"));
+app.get("/", (req, res) => {
+  const path = require("path");
+  res.sendFile(path.resolve("../dist/index.html"));
+});
 
 const roomRoutes = express.Router();
 app.use("/NewRoom", roomRoutes);

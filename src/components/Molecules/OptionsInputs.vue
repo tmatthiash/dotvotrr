@@ -42,7 +42,6 @@ export default {
         this.optionState = false;
         return;
       }
-      console.log("submitting");
       const { roomNumber, newOption } = this;
       // axios.post("http://localhost:3000/options/add/", { roomNumber, newOption }).then(res => {
       //   console.log(res.data);
