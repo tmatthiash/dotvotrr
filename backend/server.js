@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { RoomStatuses } = require("../enums");
+var schedule = require("node-schedule");
 
 const PORT = process.env.PORT || 3000;
 
@@ -10,6 +11,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 let Rooms = [];
+
+const ONE_HOUR = 60 * 60 * 1000;
+schedule.scheduleJob("00 * * * *", function() {
+  const now = new Date();
+  console.log("roomcount before: ", Rooms.length);
+  Rooms = Rooms.filter(rm => now - rm.createdAtDate > ONE_HOUR * 3);
+  console.log("roomcount after: ", Rooms.length);
+});
 
 app.use("/", express.static("../dist"));
 app.get("/", (req, res) => {
@@ -32,7 +41,8 @@ roomRoutes.route("/").post((req, res) => {
     roomStatus: RoomStatuses.addingOptions,
     options: [],
     users: [],
-    totalVotes: 0
+    totalVotes: 0,
+    createdAtDate: new Date()
   };
   Rooms.push(newRoom);
   res.json(newRoom);
@@ -40,28 +50,32 @@ roomRoutes.route("/").post((req, res) => {
 roomRoutes.route("/:roomNumber").get((req, res) => {
   const roomNumber = parseInt(req.params.roomNumber);
   const foundRoom = Rooms.find(room => room.roomNumber === roomNumber);
-  res.json(foundRoom);
+  if (!foundRoom) {
+    res.json(false);
+  } else {
+    res.json(foundRoom);
+  }
 });
 
-const optionsRoute = express.Router();
-app.use("/options", optionsRoute);
-optionsRoute.route("/add").post((req, res) => {
-  const { newOption, roomNumber } = req.body;
-  const foundRoom = Rooms.find(
-    room => room.roomNumber === parseInt(roomNumber)
-  );
-  const updatedOptions = {
-    ...foundRoom.options,
-    newOption
-  };
-  const updatedRoom = {
-    ...foundRoom,
-    options: updatedOptions
-  };
-  Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
-  Rooms.push(updatedRoom);
-  res.json("Success");
-});
+// const optionsRoute = express.Router();
+// app.use("/options", optionsRoute);
+// optionsRoute.route("/add").post((req, res) => {
+//   const { newOption, roomNumber } = req.body;
+//   const foundRoom = Rooms.find(
+//     room => room.roomNumber === parseInt(roomNumber)
+//   );
+//   const updatedOptions = {
+//     ...foundRoom.options,
+//     newOption
+//   };
+//   const updatedRoom = {
+//     ...foundRoom,
+//     options: updatedOptions
+//   };
+//   Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
+//   Rooms.push(updatedRoom);
+//   res.json("Success");
+// });
 
 const resultBuilder = roomNumber => {
   const foundRoom = Rooms.find(room => room.roomNumber === roomNumber);
@@ -141,6 +155,9 @@ io.on("connection", function(socket) {
       room => room.roomNumber === parseInt(roomNumber)
     );
     if (!foundRoom) {
+      return;
+    }
+    if (foundRoom.options.filter(op => op === newOption).length !== 0) {
       return;
     }
     console.log("old Options", foundRoom.options);
