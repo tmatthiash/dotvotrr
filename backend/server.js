@@ -16,7 +16,7 @@ const ONE_HOUR = 60 * 60 * 1000;
 schedule.scheduleJob("00 * * * *", function() {
   const now = new Date();
   console.log("roomcount before: ", Rooms.length);
-  Rooms = Rooms.filter(rm => now - rm.createdAtDate > ONE_HOUR * 3);
+  Rooms = Rooms.filter(rm => now - rm.createdAtDate < ONE_HOUR * 3);
   console.log("roomcount after: ", Rooms.length);
 });
 

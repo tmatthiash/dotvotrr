@@ -93,7 +93,7 @@ export default {
     getRoomInfo() {
       console.log("room ", this.getRoomNumber);
       axios
-        .get(`http://localhost:3000/NewRoom/${this.roomNumber}`)
+        .get(`http://${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
         .then(res => {
           console.log("loaded existing room");
           console.log(res.data);
