@@ -3,7 +3,12 @@
     <b-list-group>
       <b-list-group-item class="voting-option" v-for="(result, index) in resultsList" :key="index">
         {{result.name}}
-        <div>Vote Total: {{result.count}}</div>
+        <div>
+          <img class="gold" v-if="index===0" src="../../assets/gold.svg" alt="Gold" />
+          <img class="silver" v-if="index===1" src="../../assets/silver.svg" alt="Silver" />
+          <img class="bronze" v-if="index===2" src="../../assets/bronze.svg" alt="Bronze" />
+          Vote Total: {{result.count}}
+        </div>
       </b-list-group-item>
     </b-list-group>
   </div>
@@ -28,5 +33,9 @@ export default {
   justify-content: space-between;
   display: flex;
   align-items: center;
+}
+img{
+  height:1.3rem;
+  width:1.3rem;
 }
 </style>

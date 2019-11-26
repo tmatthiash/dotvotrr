@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-jumbotron header="Dot Votrr" lead="For Dot Voting">
-      <p>Vote bettrr</p>
+    <b-jumbotron header="Dot Votrr" lead="Vote bettrr">
+      <p>A better way to make decisions as a group.</p>
     </b-jumbotron>
   </div>
 </template>
