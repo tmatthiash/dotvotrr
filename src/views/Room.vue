@@ -19,7 +19,7 @@
           >Results for {{roomName}}!</div>
         </div>
         <creator-tools
-          v-if="adminName===userName"
+          v-if="adminName===userName && roomStatus!==RoomStatuses.results"
           :roomNumber="roomNumber"
           :roomStatus="roomStatus"
           :totalVotes="totalVotes"
