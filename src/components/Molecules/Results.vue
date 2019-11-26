@@ -16,12 +16,13 @@
 
 <script>
 import io from "socket.io-client";
+import { api_url, backend_port } from "../../config";
 
 export default {
   name: "Results",
   data() {
     return {
-      socket: io("localhost:3000")
+      socket: io(`${api_url}:${backend_port}`)
     };
   },
   props: ["resultsList"]
@@ -34,8 +35,8 @@ export default {
   display: flex;
   align-items: center;
 }
-img{
-  height:1.3rem;
-  width:1.3rem;
+img {
+  height: 1.3rem;
+  width: 1.3rem;
 }
 </style>

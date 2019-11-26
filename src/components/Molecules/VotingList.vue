@@ -24,12 +24,13 @@
 <script>
 import io from "socket.io-client";
 import { mapGetters } from "vuex";
+import { api_url, backend_port } from "../../config";
 
 export default {
   name: "VotingList",
   data() {
     return {
-      socket: io("localhost:3000"),
+      socket: io(`${api_url}:${backend_port}`),
       voteList: []
     };
   },

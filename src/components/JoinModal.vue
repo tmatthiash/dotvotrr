@@ -38,6 +38,7 @@
 
 <script>
 import axios from "axios";
+import { api_url, backend_port } from "../config";
 
 export default {
   name: "JoinModal",
@@ -74,7 +75,7 @@ export default {
         return;
       }
       axios
-        .get(`http://localhost:3000/NewRoom/${this.roomNumber}`)
+        .get(`http://${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
         .then(res => {
           console.log("loaded existing room");
           this.setRoomInfo(res.data.roomNumber);

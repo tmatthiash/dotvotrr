@@ -15,6 +15,7 @@
 <script>
 import io from "socket.io-client";
 import RoomStatuses from "../../../enums";
+import { api_url, backend_port } from "../../config";
 
 export default {
   name: "CreatorTools",
@@ -26,7 +27,7 @@ export default {
   },
   data() {
     return {
-      socket: io("localhost:3000")
+      socket: io(`${api_url}:${backend_port}`)
     };
   },
 

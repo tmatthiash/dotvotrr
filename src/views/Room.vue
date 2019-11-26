@@ -54,6 +54,7 @@ import RoomStatuses from "../../enums";
 import CreatorTools from "../components/Molecules/CreatorTools.vue";
 import VotingList from "../components/Molecules/VotingList.vue";
 import Results from "../components/Molecules/Results.vue";
+import { api_url, backend_port } from "../config";
 
 export default {
   name: "Room",
@@ -72,7 +73,7 @@ export default {
   data() {
     return {
       roomName: "",
-      socket: io("localhost:3000"),
+      socket: io(`${api_url}:${backend_port}`),
       roomStatus: null,
       votesPerPerson: 3,
       adminName: "",

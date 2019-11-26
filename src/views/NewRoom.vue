@@ -34,6 +34,7 @@
 // @ is an alias to /src
 import axios from "axios";
 import HomeButton from "../components/atoms/HomeButton.vue";
+import { api_url, backend_port } from "../config";
 
 export default {
   name: "NewRoom",
@@ -54,11 +55,13 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      axios.post("http://localhost:3000/NewRoom/", this.form).then(res => {
-        console.log(res.data);
-        this.setRoomInfo(res.data.roomNumber, res.data.adminName);
-        this.$router.push({ name: "Room" });
-      });
+      axios
+        .post(`http://${api_url}:${backend_port}/NewRoom/`, this.form)
+        .then(res => {
+          console.log(res.data);
+          this.setRoomInfo(res.data.roomNumber, res.data.adminName);
+          this.$router.push({ name: "Room" });
+        });
     },
     setRoomInfo(roomNumber, adminName) {
       this.$store.commit("setRoom", roomNumber);
