@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     openModal() {
-      console.log("opening");
       this.isModalOpen = true;
       // this.$refs.joinModal.show()
       // this.$refs['joinModal'].show()
