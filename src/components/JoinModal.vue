@@ -12,7 +12,7 @@
     <form ref="form" @submit.stop.prevent="handleSubmit">
       <b-form-group
         :state="nameState"
-        label="Name"
+        label="Your Name"
         label-for="name-input"
         invalid-feedback="Name is required"
       >

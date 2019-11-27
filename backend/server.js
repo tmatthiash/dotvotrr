@@ -28,13 +28,20 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve("../dist/index.html"));
 });
 
+const generateRoomNumber = () => {
+  let newRoomNumber;
+  do {
+    newRoomNumber = Math.floor(1000 + Math.random() * 9000);
+  } while (Rooms.filter(rm => rm.roomNumber === newRoomNumber).length !== 0);
+};
+
 const roomRoutes = express.Router();
 app.use("/NewRoom", roomRoutes);
 roomRoutes.route("/").post((req, res) => {
   const RoomName = req.body.RoomName;
   const adminName = req.body.UserName;
   const votesPerPerson = req.body.selectedVoteNumber;
-  const roomNumber = Math.floor(1000 + Math.random() * 9000);
+  const roomNumber = generateRoomNumber;
   const newRoom = {
     RoomName,
     adminName,
