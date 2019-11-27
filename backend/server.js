@@ -3,9 +3,11 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { RoomStatuses } = require("../enums");
-var schedule = require("node-schedule");
+const schedule = require("node-schedule");
+const history = require("connect-history-api-fallback");
 
 const PORT = process.env.PORT || 3000;
+app.use(history());
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -47,6 +49,12 @@ roomRoutes.route("/").post((req, res) => {
   Rooms.push(newRoom);
   res.json(newRoom);
 });
+
+roomRoutes.route("/").get((req, res) => {
+  const path = require("path");
+  res.sendFile(path.resolve("../dist/index.html"));
+});
+
 roomRoutes.route("/:roomNumber").get((req, res) => {
   const roomNumber = parseInt(req.params.roomNumber);
   const foundRoom = Rooms.find(room => room.roomNumber === roomNumber);
@@ -56,26 +64,6 @@ roomRoutes.route("/:roomNumber").get((req, res) => {
     res.json(foundRoom);
   }
 });
-
-// const optionsRoute = express.Router();
-// app.use("/options", optionsRoute);
-// optionsRoute.route("/add").post((req, res) => {
-//   const { newOption, roomNumber } = req.body;
-//   const foundRoom = Rooms.find(
-//     room => room.roomNumber === parseInt(roomNumber)
-//   );
-//   const updatedOptions = {
-//     ...foundRoom.options,
-//     newOption
-//   };
-//   const updatedRoom = {
-//     ...foundRoom,
-//     options: updatedOptions
-//   };
-//   Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
-//   Rooms.push(updatedRoom);
-//   res.json("Success");
-// });
 
 const resultBuilder = roomNumber => {
   const foundRoom = Rooms.find(room => room.roomNumber === roomNumber);
@@ -88,14 +76,15 @@ const resultBuilder = roomNumber => {
     return retValue;
   }, []);
 
-  return foundRoom.options
+  const result = foundRoom.options
     .map(opt => {
       return {
         name: opt,
         count: combinedVotes.filter(cv => cv === opt).length
       };
     })
-    .sort((a, b) => a.count < b.count);
+    .sort((a, b) => b.count - a.count);
+  return result;
 };
 
 const server = app.listen(PORT, function() {

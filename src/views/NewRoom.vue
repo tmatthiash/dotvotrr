@@ -58,7 +58,6 @@ export default {
       axios
         .post(`http://${api_url}:${backend_port}/NewRoom/`, this.form)
         .then(res => {
-          console.log(res.data);
           this.setRoomInfo(res.data.roomNumber, res.data.adminName);
           this.$router.push({ name: "Room" });
         });

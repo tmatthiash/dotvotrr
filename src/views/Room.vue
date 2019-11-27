@@ -91,12 +91,9 @@ export default {
   },
   methods: {
     getRoomInfo() {
-      console.log("room ", this.getRoomNumber);
       axios
         .get(`http://${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
         .then(res => {
-          console.log("loaded existing room");
-          console.log(res.data);
           this.roomName = res.data.RoomName;
           this.roomStatus = res.data.roomStatus;
           this.adminName = res.data.adminName;
@@ -126,7 +123,6 @@ export default {
       this.roomStatus = data;
     });
     this.socket.on("FORCE_NAME_CHANGE", data => {
-      console.log("force change", data);
       this.$store.commit("setUserName", data);
     });
     this.socket.on("UPDATE_TOTAL_VOTES", data => {
