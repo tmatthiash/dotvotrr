@@ -18,7 +18,8 @@
   color: #2c3e50;
   /* margin-top:20px; */
   /* padding-top: 20px; */
-  height: 100vh;
+  min-height: 100vh;  
+  width: 100vw;
   /* background-color: orange; */
   background: rgb(255, 165, 0);
   background: linear-gradient(

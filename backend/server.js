@@ -5,6 +5,7 @@ const cors = require("cors");
 const { RoomStatuses } = require("../enums");
 const schedule = require("node-schedule");
 const history = require("connect-history-api-fallback");
+const { nameChanger } = require("./nameChanger");
 
 const PORT = process.env.PORT || 3000;
 app.use(history());
@@ -103,6 +104,7 @@ const io = require("socket.io")(server);
 io.on("connection", function(socket) {
   socket.on("join", function(data) {
     const { roomNumber, userName, effectiveUUID } = data;
+    const editedName = nameChanger(userName);
     console.log("joining room: ", roomNumber);
     socket.join(roomNumber);
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === roomNumber);
@@ -114,7 +116,7 @@ io.on("connection", function(socket) {
     const foundUser = foundRoom.users.find(u => u.UUID === effectiveUUID);
     if (!foundUser) {
       let isNameGood = false;
-      let nameBuilder = userName;
+      let nameBuilder = editedName;
       let i = 2;
       while (!isNameGood) {
         if (
@@ -122,7 +124,7 @@ io.on("connection", function(socket) {
         ) {
           isNameGood = true;
         } else {
-          nameBuilder = userName + "(" + i + ")";
+          nameBuilder = editedName + "(" + i + ")";
           i = i + 1;
         }
       }
@@ -148,17 +150,18 @@ io.on("connection", function(socket) {
   socket.on("ADD_OPTION", function(data) {
     console.log("adding option");
     const { newOption, roomNumber } = data;
+    const editedNewOption = nameChanger(newOption);
     const foundRoom = Rooms.find(
       room => room.roomNumber === parseInt(roomNumber)
     );
     if (!foundRoom) {
       return;
     }
-    if (foundRoom.options.filter(op => op === newOption).length !== 0) {
+    if (foundRoom.options.filter(op => op === editedNewOption).length !== 0) {
       return;
     }
     console.log("old Options", foundRoom.options);
-    const updatedOptions = [...foundRoom.options, newOption];
+    const updatedOptions = [...foundRoom.options, editedNewOption];
     const updatedRoom = {
       ...foundRoom,
       options: updatedOptions
