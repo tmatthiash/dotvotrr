@@ -33,6 +33,7 @@ const generateRoomNumber = () => {
   do {
     newRoomNumber = Math.floor(1000 + Math.random() * 9000);
   } while (Rooms.filter(rm => rm.roomNumber === newRoomNumber).length !== 0);
+  return newRoomNumber;
 };
 
 const roomRoutes = express.Router();
@@ -41,7 +42,7 @@ roomRoutes.route("/").post((req, res) => {
   const RoomName = req.body.RoomName;
   const adminName = req.body.UserName;
   const votesPerPerson = req.body.selectedVoteNumber;
-  const roomNumber = generateRoomNumber;
+  const roomNumber = generateRoomNumber();
   const newRoom = {
     RoomName,
     adminName,
