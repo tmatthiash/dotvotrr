@@ -1,6 +1,7 @@
 <template>
   <div class="NewRoom">
-    <HomeButton />
+    <NavBar />
+    <!-- <HomeButton /> -->
     <b-card title="Create New Room" id="cardNew">
       <b-form @submit="onSubmit" v-if="show">
         <div class="form-inputs">
@@ -33,8 +34,9 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import HomeButton from "../components/atoms/HomeButton.vue";
+// import HomeButton from "../components/atoms/HomeButton.vue";
 import { api_url, backend_port } from "../config";
+import NavBar from "../components/atoms/NavBar.vue"
 
 export default {
   name: "NewRoom",
@@ -50,7 +52,8 @@ export default {
     };
   },
   components: {
-    HomeButton
+    // HomeButton,
+    NavBar
   },
   methods: {
     onSubmit(evt) {

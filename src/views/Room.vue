@@ -1,6 +1,6 @@
 <template>
   <div class="Room">
-    <HomeButton />
+    <NavBar />
     <b-card id="cardNew">
       <div class="topStuffHolder">
         <div>
@@ -48,13 +48,13 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 import io from "socket.io-client";
-import HomeButton from "../components/atoms/HomeButton.vue";
 import OptionsInputs from "../components/Molecules/OptionsInputs.vue";
 import RoomStatuses from "../../enums";
 import CreatorTools from "../components/Molecules/CreatorTools.vue";
 import VotingList from "../components/Molecules/VotingList.vue";
 import Results from "../components/Molecules/Results.vue";
 import { api_url, backend_port } from "../config";
+import NavBar from "../components/atoms/NavBar.vue";
 
 export default {
   name: "Room",
@@ -84,10 +84,10 @@ export default {
   },
   components: {
     OptionsInputs,
-    HomeButton,
     CreatorTools,
     VotingList,
-    Results
+    Results,
+    NavBar
   },
   methods: {
     getRoomInfo() {
@@ -140,7 +140,7 @@ export default {
 
 <style>
 #cardNew {
-  margin: 40px;
+  margin: 20px 40px 40px 40px;
   border-color: black;
   border-width: 2px;
   border-radius: 0.25rem;

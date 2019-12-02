@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div id="padding" />
     <Welcome msg="Vote Bettrr" />
   </div>
 </template>
@@ -15,3 +16,8 @@ export default {
   }
 };
 </script>
+<style>
+#padding {
+  height: 2em;
+}
+</style>

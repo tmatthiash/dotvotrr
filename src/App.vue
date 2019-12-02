@@ -1,10 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>-->
-    <div id="padding" />
     <router-view />
   </div>
 </template>
@@ -27,10 +22,6 @@
     rgba(255, 165, 0, 1) 45%,
     #ff6400 100%
   );
-}
-
-#padding {
-  height: 2em;
 }
 
 #nav {
