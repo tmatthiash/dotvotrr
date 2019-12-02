@@ -41,7 +41,7 @@ const roomRoutes = express.Router();
 app.use("/NewRoom", roomRoutes);
 roomRoutes.route("/").post((req, res) => {
   const RoomName = req.body.RoomName;
-  const adminName = req.body.UserName;
+  const adminName = nameChanger(req.body.UserName);
   const votesPerPerson = req.body.selectedVoteNumber;
   const roomNumber = generateRoomNumber();
   const newRoom = {
