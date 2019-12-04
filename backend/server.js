@@ -199,8 +199,8 @@ io.on("connection", function(socket) {
     io.to(data.roomNumber).emit("SET_ROOM_STATUS", updatedRoom.roomStatus);
   });
 
-  socket.on("ADD_VOTE", function(data) {
-    const { roomNumber, option, UUID } = data;
+  socket.on("CHANGE_VOTE", function(data) {
+    const { roomNumber, option, UUID, addingVote } = data;
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === roomNumber);
     if (!foundRoom) {
       console.log("no room found");
@@ -209,26 +209,40 @@ io.on("connection", function(socket) {
     const foundUser = foundRoom.users.find(u => u.UUID === UUID);
     if (!foundUser) {
       console.log("no user");
-
       return;
     }
-    if (foundUser.votes.length >= foundRoom.votesPerPerson) {
+    if (!foundUser.votes) {
+      return;
+    }
+
+    if (foundUser.votes.length >= foundRoom.votesPerPerson && addingVote) {
       console.log("too many votes");
-
       return;
     }
-    const newVotes = [...foundUser.votes, option];
+    let newVotes;
+    if (addingVote) {
+      newVotes = [...foundUser.votes, option];
+    } else {
+      const index = foundUser.votes.indexOf(option);
+      if (index !== -1) {
+        newVotes = foundUser.votes;
+        newVotes.splice(index, 1);
+      }
+    }
     const newUser = { ...foundUser, votes: newVotes };
     const filteredUsers = foundRoom.users.filter(u => u.UUID !== UUID);
     const updatedUsers = [...filteredUsers, newUser];
+
     const newRoom = {
       ...foundRoom,
       users: updatedUsers,
-      totalVotes: foundRoom.totalVotes + 1
+      totalVotes: addingVote
+        ? foundRoom.totalVotes + 1
+        : foundRoom.totalVotes - 1
     };
     Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
     Rooms.push(newRoom);
-    socket.emit("UPDATE_OWN_VOTES", newVotes);
+    console.log(newVotes);
 
     io.to(roomNumber).emit("UPDATE_TOTAL_VOTES", newRoom.totalVotes);
   });

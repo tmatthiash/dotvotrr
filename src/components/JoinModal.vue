@@ -91,6 +91,7 @@ export default {
       this.$store.commit("setRoom", roomNumber);
       this.$store.commit("setUserName", this.userName);
       this.$router.push({ name: "Room" });
+      this.$store.commit("setOwnVotes", []);
     },
     handleCancel(evt) {
       evt.preventDefault();

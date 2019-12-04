@@ -14,6 +14,7 @@ export default new Vuex.Store({
     userName: null,
     UUID: null,
     optionList: [],
+    ownVotes: [],
     resultList: []
   },
   mutations: {
@@ -31,6 +32,16 @@ export default new Vuex.Store({
     },
     setResultList(state, payload) {
       state.resultList = payload;
+    },
+    setOwnVotes(state, payload) {
+      state.ownVotes = payload;
+    },
+    addOwnVote(state, payload) {
+      state.ownVotes = [...state.ownVotes, payload];
+    },
+    removeOwnVote(state, payload) {
+      const index = state.ownVotes.indexOf(payload);
+      if (index !== -1) state.ownVotes.splice(index, 1);
     }
   },
   actions: {},
@@ -50,6 +61,9 @@ export default new Vuex.Store({
     },
     getResultList: state => {
       return state.resultList;
+    },
+    getOwnVotes: state => {
+      return state.ownVotes;
     }
   },
   plugins: [vuexLocal.plugin]

@@ -36,7 +36,7 @@
 import axios from "axios";
 // import HomeButton from "../components/atoms/HomeButton.vue";
 import { api_url, backend_port } from "../config";
-import NavBar from "../components/atoms/NavBar.vue"
+import NavBar from "../components/atoms/NavBar.vue";
 
 export default {
   name: "NewRoom",
@@ -66,6 +66,7 @@ export default {
         });
     },
     setRoomInfo(roomNumber, adminName) {
+      this.$store.commit("setOwnVotes", []);
       this.$store.commit("setRoom", roomNumber);
       this.$store.commit("setUserName", adminName);
     }
