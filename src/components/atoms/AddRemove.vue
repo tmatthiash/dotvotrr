@@ -18,7 +18,7 @@
     <button
       class="doubleButton"
       @click="addVote"
-      :disabled="ownVotes.filter(ov => ov === option).length ===0"
+      :disabled="ownVotes.length >= votesPerPerson"
     />
     <b-button
       :disabled="ownVotes.length >= votesPerPerson"
