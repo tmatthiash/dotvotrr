@@ -1,8 +1,12 @@
 <template>
   <div class="addRemover">
+    <button
+      class="doubleButton"
+      @click="removeVote"
+      :disabled="ownVotes.filter(ov => ov === option).length ===0"
+    />
     <b-button
       :disabled="ownVotes.filter(ov => ov === option).length ===0"
-      @click="removeVote"
       id="minusButtons"
       size="sm"
     >
@@ -11,6 +15,11 @@
     <span class="spanPadding">
       <b-badge pill id="voting-badge">{{ownVotes.filter(op => op === option).length}}</b-badge>
     </span>
+    <button
+      class="doubleButton"
+      @click="addVote"
+      :disabled="ownVotes.filter(ov => ov === option).length ===0"
+    />
     <b-button
       :disabled="ownVotes.length >= votesPerPerson"
       @click="addVote"
@@ -61,7 +70,7 @@ export default {
 
 <style>
 .addRemover {
-  width: 95px;
+  width: 105px;
   height: 30px;
 }
 .spanPadding {
@@ -70,7 +79,7 @@ export default {
 
 #voting-badge {
   background-color: transparent;
-  color:rgb(35, 22, 81)
+  color: rgb(35, 22, 81);
 }
 
 .minusSymbol {
@@ -83,6 +92,19 @@ export default {
   margin-top: -4px;
 }
 
+.doubleButton {
+  position: absolute;
+  background-color: transparent;
+  color: transparent;
+  height: 30px;
+  width: 30px;
+  border: none;
+  z-index: 200;
+}
+.doubleButton:focus {
+  outline: none;
+}
+
 #minusButtons {
   font-size: 30px;
   background-color: transparent;
@@ -93,11 +115,11 @@ export default {
   padding: 0px;
   height: 30px;
   width: 30px;
-  margin-right: 5px;
+  z-index: 100;
 }
 #minusButtons:disabled {
   background-color: gray;
-  border-color:gray
+  border-color: gray;
 }
 
 #addButtons {
@@ -110,11 +132,10 @@ export default {
   padding: 0px;
   height: 30px;
   width: 30px;
-  margin-left: 5px;
 }
 
 #addButtons:disabled {
   background-color: gray;
-  border-color: gray
+  border-color: gray;
 }
 </style>
