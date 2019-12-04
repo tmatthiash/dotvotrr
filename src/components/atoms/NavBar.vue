@@ -31,7 +31,7 @@ export default {
   );
 }
 #home-button {
-    background-color: white;
+    background-color: orange;
     color: rgb(35, 22, 81);
     border: 0px;
 }

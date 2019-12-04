@@ -10,7 +10,7 @@
         >
           <b-form-input id="option-input" v-model="newOption" :state="optionState" required></b-form-input>
         </b-form-group>
-        <b-button type="submit" variant="primary">Submit</b-button>
+        <b-button id="add-option" type="submit" variant="primary">Submit</b-button>
       </b-form>
     </div>
     <div class="option-input">
@@ -89,5 +89,9 @@ export default {
   .option-input {
     margin-top: 1em;
   }
+}
+#add-option {
+  background-color: rgb(35, 22, 81);
+  border-width: 0px;
 }
 </style>

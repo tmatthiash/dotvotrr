@@ -69,38 +69,44 @@ export default {
 }
 
 #voting-badge {
-  background-color: rgb(35, 22, 81);
+  background-color: transparent;
+  color:rgb(35, 22, 81)
 }
 
 .minusSymbol {
   position: inherit;
-  margin-top: -9px;
+  margin-top: -11px;
 }
 
 .addSymbol {
   position: inherit;
-  margin-top: -3px;
+  margin-top: -4px;
 }
 
 #minusButtons {
   font-size: 30px;
   background-color: transparent;
-  color: #231651;
-  border: none;
+  color: white;
+  border-color: #231651;
+  background-color: #231651;
+  border-radius: 50%;
   padding: 0px;
   height: 30px;
   width: 30px;
   margin-right: 5px;
 }
 #minusButtons:disabled {
-  color:transparent;
+  background-color: gray;
+  border-color:gray
 }
 
 #addButtons {
   font-size: 24px;
   background-color: transparent;
-  color: rgb(35, 22, 81);
-  border: none;
+  color: white;
+  border-color: #231651;
+  background-color: #231651;
+  border-radius: 50%;
   padding: 0px;
   height: 30px;
   width: 30px;
@@ -108,6 +114,7 @@ export default {
 }
 
 #addButtons:disabled {
-  color:transparent;
+  background-color: gray;
+  border-color: gray
 }
 </style>

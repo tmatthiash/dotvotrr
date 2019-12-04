@@ -4,7 +4,9 @@
     <b-list-group>
       <b-list-group-item class="voting-option" v-for="(option, index) in optionList" :key="index">
         <div class="text-and-button">
+          <div class="just-text">
           {{option}}
+          </div>
           <div>
             <!-- <b-badge
               pill
@@ -89,5 +91,8 @@ export default {
   height: 10px;
   width: 10px;
   margin-right: 5px;
+}
+.just-text {
+  max-width: calc(100% - 95px);
 }
 </style>

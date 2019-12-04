@@ -24,7 +24,7 @@
               required
             ></b-form-select>
           </b-form-group>
-          <b-button type="submit" variant="primary">Submit</b-button>
+          <b-button id="submit-button" type="submit" variant="primary">Submit</b-button>
         </div>
       </b-form>
     </b-card>
@@ -87,5 +87,9 @@ export default {
 }
 .form-inputs {
   padding: 1.7rem;
+}
+#submit-button {
+  background-color: rgb(35, 22, 81);
+  border-width: 0px;
 }
 </style>
