@@ -81,6 +81,7 @@ export default {
 
   border-width: 2px;
   border-radius: 0.25rem;
+  top: 3em;
 }
 .form-inputs {
   text-align: left;
@@ -88,6 +89,7 @@ export default {
 .form-inputs {
   padding: 1.7rem;
 }
+
 #submit-button {
   background-color: rgb(35, 22, 81);
   border-width: 0px;

@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <TopBanner />
-
     <b-row>
       <b-col lg="6" class="pb-2">
         <router-link to="/NewRoom">
@@ -12,7 +11,6 @@
         <b-button size="lg" @click="openModal">Join A Voting Room</b-button>
       </b-col>
     </b-row>
-    <!-- <JoinModal ref="joinModal"/> -->
     <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal" />
   </div>
 </template>

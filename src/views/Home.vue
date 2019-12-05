@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <div id="padding" />
+  <div class="home">    
+    <!-- <div id="padding" /> -->
     <Welcome msg="Vote Bettrr" />
   </div>
 </template>
@@ -19,5 +19,10 @@ export default {
 <style>
 #padding {
   height: 2em;
+}
+.home {
+  top: 3em;
+  position:absolute;
+  height: calc(100vh - 3em)
 }
 </style>

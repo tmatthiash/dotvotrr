@@ -21,6 +21,10 @@ export default {
 <style>
 #nav-holder {
   height: 3em;
+  position: fixed;
+  z-index: 300;
+  top: 0px;
+  width:100%;
 }
 #nav-bar {
   background-color: rgb(35, 22, 81);
@@ -35,4 +39,5 @@ export default {
     color: rgb(35, 22, 81);
     border: 0px;
 }
+
 </style>
