@@ -21,7 +21,7 @@
         </div>
         <div class="spacer">
           <div v-for="(vote, index) in voteList.filter(op => op === option)" :key="index">
-            <img class="vote-svg" src="../../assets/circle.svg" alt="Vote" />
+            <div class="dot-image" />
           </div>
         </div>
       </b-list-group-item>
@@ -41,7 +41,7 @@ import io from "socket.io-client";
 import { api_url, backend_port } from "../../config";
 import AddRemove from "../atoms/AddRemove.vue";
 import { mapGetters } from "vuex";
-import CreatorTools from "./CreatorTools.vue"
+import CreatorTools from "./CreatorTools.vue";
 
 export default {
   name: "VotingList",
@@ -78,23 +78,13 @@ export default {
   padding-right: 0px;
   display: block;
   border: none;
-  max-width: 90%
+  max-width: 90%;
 }
 .text-and-button {
   justify-content: space-between;
   align-items: center;
   display: flex;
-}
-.voting-button {
-  background-color: blue;
-}
-.voting-button:hover {
-  background-color: blue;
-}
-.voting-badge {
-  color: blue;
-  background-color: aliceblue;
-  margin-right: 2rem;
+  width: 110%;
 }
 .spacer {
   height: 20px;
@@ -103,10 +93,17 @@ export default {
   position: absolute;
   bottom: 0px;
 }
-.vote-svg {
+.dot-image {
   height: 10px;
   width: 10px;
+  border-radius: 50%;
+  background-color: orange;
+  border-width: 1px;
+  border-color: #231651;
+  border-style: solid;
+  margin-top: 5px;
   margin-right: 5px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 .just-text {
   max-width: calc(100% - 95px);
