@@ -9,7 +9,7 @@
         >
           <b-form-input id="option-input" v-model="newOption" :state="optionState" required></b-form-input>
         </b-form-group>
-        <b-button id="add-option" type="submit" variant="primary">Add Option</b-button>
+        <b-button id="add-option" type="submit" variant="primary">ADD OPTIONS</b-button>
       </b-form>
     </div>
     <!-- <div class="option-input">
