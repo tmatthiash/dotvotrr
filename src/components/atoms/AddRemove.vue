@@ -70,7 +70,7 @@ export default {
 
 <style>
 .addRemover {
-  width: 105px;
+  width: 82px;
   height: 30px;
 }
 .spanPadding {

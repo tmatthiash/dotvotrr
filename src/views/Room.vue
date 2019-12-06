@@ -146,13 +146,20 @@ export default {
 <style scoped>
 #roomCard {
   top: 1em;
-  margin-left: 10px;
-  margin-right: 10px;
   border-color: black;
   border-width: 2px;
   border-radius: 0.25rem;
   min-height: calc(100vh - 5em);
+  margin-left: 40px;
+  margin-right: 40px;
   height: 95%;
+}
+@media (max-width: 500px) {
+  #roomCard {
+    height: 95%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 .topStuffHolder {
   padding-bottom: 15px;
@@ -179,6 +186,6 @@ export default {
   height: 100%;
 }
 .vote-list-holder {
-  height: calc(100% - 100px);
+  height: calc(100% - 110px);
 }
 </style>
