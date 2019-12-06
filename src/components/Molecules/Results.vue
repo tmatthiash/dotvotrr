@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="result-component">
     <h4>Vote Totals</h4>
     <b-list-group>
       <b-list-group-item class="voting-option" v-for="(result, index) in resultsList" :key="index">
@@ -48,5 +48,17 @@ img {
 }
 .name-holder {
   max-width: calc(100% - 35px);
+}
+.result-component {
+  height: 100%;
+  overflow: scroll;
+  white-space: normal;
+}
+.result-component::-webkit-scrollbar {
+  width: 0.3em;
+  background-color: transparent;
+}
+.result-component::-webkit-scrollbar-thumb {
+  background-color: rgb(35, 22, 81);
 }
 </style>

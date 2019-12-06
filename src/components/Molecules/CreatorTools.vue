@@ -1,13 +1,11 @@
 <template>
-  <div>
+  <div class="creator-tools">
     <div v-if="roomStatus===RoomStatuses.addingOptions">
-      <p>Your are the room creator so you choose when to start the voting</p>
-      <b-button id="start-vote" size="lg" variant="primary" @click="advanceVoting">Start the voting</b-button>
+      <b-button id="start-vote" size="md" variant="primary" @click="advanceVoting">Start the voting</b-button>
     </div>
     <div v-if="roomStatus===RoomStatuses.dotVoting">
-      <p>Your are the room creator so you choose when voting ends</p>
       <p>{{totalVotes}} votes recorded out of expected {{expectedVotes}}</p>
-      <b-button id="finish-vote" size="lg" variant="primary" @click="advanceVoting">Show Results!</b-button>
+      <b-button id="finish-vote" size="md" variant="primary" @click="advanceVoting">Show Results!</b-button>
     </div>
   </div>
 </template>
@@ -41,6 +39,12 @@ export default {
 </script>
 
 <style scoped>
+.creator-tools {
+  bottom: 7px;
+  width: 100%;
+  left:0px;
+  justify-content: center;
+}
 #start-vote {
   background-color: rgb(35, 22, 81);
   border-width: 0px;
@@ -48,5 +52,8 @@ export default {
 #finish-vote {
   background-color: rgb(35, 22, 81);
   border-width: 0px;
+}
+p {
+  margin:0px;
 }
 </style>

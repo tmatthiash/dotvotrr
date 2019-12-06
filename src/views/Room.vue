@@ -1,14 +1,14 @@
 <template>
   <div class="Room">
-    <NavBar />
-    <b-card id="cardNew">
+    <Navbar />
+    <b-card id="roomCard">
       <div class="topStuffHolder">
         <div>
-          <H4>Room Number: {{roomNumber}}</H4>
-          <div
-            v-if="roomStatus===RoomStatuses.addingOptions"
-            class="room-subtitle"
-          >Hi {{userName}}, add options for: {{roomName}}</div>
+          <H4>
+            Room Numbrr:
+            <br />
+            {{roomNumber}}
+          </H4>
           <div
             v-if="roomStatus===RoomStatuses.dotVoting"
             class="room-subtitle"
@@ -18,25 +18,32 @@
             class="room-subtitle"
           >Results for {{roomName}}!</div>
         </div>
-        <creator-tools
-          v-if="adminName===userName && roomStatus!==RoomStatuses.results"
+      </div>
+      <div v-if="roomStatus===RoomStatuses.addingOptions" class="room-option-inputs">
+        <OptionsInputs
+          :adminName="adminName"
+          :userName="userName"
           :roomNumber="roomNumber"
+          :optionList="optionList"
+          :roomStatus="roomStatus"
+          :totalVotes="totalVotes"
+          :expectedVotes="(userCount*votesPerPerson)"
+          :roomName="roomName"
+        />
+      </div>
+      <div v-if="roomStatus===RoomStatuses.dotVoting" class="vote-list-holder">
+        <VotingList
+          :adminName="adminName"
+          :userName="userName"
+          :roomNumber="roomNumber"
+          :optionList="optionList"
+          :votesPerPerson="votesPerPerson"
           :roomStatus="roomStatus"
           :totalVotes="totalVotes"
           :expectedVotes="(userCount*votesPerPerson)"
         />
       </div>
-      <div v-if="roomStatus===RoomStatuses.addingOptions">
-        <OptionsInputs :roomNumber="roomNumber" :optionList="optionList" />
-      </div>
-      <div v-if="roomStatus===RoomStatuses.dotVoting">
-        <VotingList
-          :roomNumber="roomNumber"
-          :optionList="optionList"
-          :votesPerPerson="votesPerPerson"
-        />
-      </div>
-      <div v-if="roomStatus===RoomStatuses.results">
+      <div v-if="roomStatus===RoomStatuses.results" style="height: calc(100% - 100px);">
         <Results :resultsList="resultList" />
       </div>
     </b-card>
@@ -50,11 +57,10 @@ import { mapGetters } from "vuex";
 import io from "socket.io-client";
 import OptionsInputs from "../components/Molecules/OptionsInputs.vue";
 import RoomStatuses from "../../enums";
-import CreatorTools from "../components/Molecules/CreatorTools.vue";
 import VotingList from "../components/Molecules/VotingList.vue";
 import Results from "../components/Molecules/Results.vue";
 import { api_url, backend_port } from "../config";
-import NavBar from "../components/atoms/NavBar.vue";
+import Navbar from "../components/atoms/NavBar.vue";
 
 export default {
   name: "Room",
@@ -84,10 +90,9 @@ export default {
   },
   components: {
     OptionsInputs,
-    CreatorTools,
     VotingList,
     Results,
-    NavBar
+    Navbar
   },
   methods: {
     getRoomInfo() {
@@ -138,12 +143,16 @@ export default {
 };
 </script>
 
-<style>
-#cardNew {
-  margin: 20px 40px 40px 40px;
+<style scoped>
+#roomCard {
+  top: 1em;
+  margin-left: 10px;
+  margin-right: 10px;
   border-color: black;
   border-width: 2px;
   border-radius: 0.25rem;
+  min-height: calc(100vh - 5em);
+  height: 95%;
 }
 .topStuffHolder {
   padding-bottom: 15px;
@@ -155,5 +164,21 @@ export default {
 }
 .topStuffHolder > div {
   flex-grow: 1;
+}
+.Room {
+  top: 3em;
+  position: absolute;
+  height: calc(100vh - 3em);
+  width: 100%;
+  min-height: 560px;
+}
+.room-option-inputs {
+  height: calc(100% - 30px - 3em);
+}
+.card-body {
+  height: 100%;
+}
+.vote-list-holder {
+  height: calc(100% - 100px);
 }
 </style>

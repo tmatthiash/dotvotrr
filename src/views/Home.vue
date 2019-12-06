@@ -23,6 +23,7 @@ export default {
 .home {
   top: 3em;
   position:absolute;
-  height: calc(100vh - 3em)
+  height: calc(100vh - 3em);
+  width: 100%;
 }
 </style>

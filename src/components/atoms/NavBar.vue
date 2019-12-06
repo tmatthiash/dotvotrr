@@ -35,9 +35,10 @@ export default {
   );
 }
 #home-button {
-    background-color: orange;
-    color: rgb(35, 22, 81);
-    border: 0px;
+    color: white;
+    background-color: rgb(35, 22, 81);
+    border: 0px;    
+    font-weight:600;
 }
 
 </style>

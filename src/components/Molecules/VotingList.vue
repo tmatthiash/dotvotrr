@@ -1,12 +1,10 @@
 <template>
-  <div>
+  <div class="vote-component">
     <h4>Vote! You have used {{voteList.length}} of your {{votesPerPerson}}</h4>
-    <b-list-group>
+    <b-list-group class="vote-list-group">
       <b-list-group-item class="voting-option" v-for="(option, index) in optionList" :key="index">
         <div class="text-and-button">
-          <div class="just-text">
-          {{option}}
-          </div>
+          <div class="just-text">{{option}}</div>
           <div>
             <!-- <b-badge
               pill
@@ -28,6 +26,13 @@
         </div>
       </b-list-group-item>
     </b-list-group>
+    <creator-tools
+      v-if="userName===adminName"
+      :roomNumber="roomNumber"
+      :roomStatus="roomStatus"
+      :totalVotes="totalVotes"
+      :expectedVotes="expectedVotes"
+    />
   </div>
 </template>
 
@@ -36,13 +41,13 @@ import io from "socket.io-client";
 import { api_url, backend_port } from "../../config";
 import AddRemove from "../atoms/AddRemove.vue";
 import { mapGetters } from "vuex";
-
+import CreatorTools from "./CreatorTools.vue"
 
 export default {
   name: "VotingList",
   computed: {
     ...mapGetters({
-      voteList: "getOwnVotes",
+      voteList: "getOwnVotes"
     })
   },
   data() {
@@ -51,18 +56,29 @@ export default {
     };
   },
   components: {
-    AddRemove
+    AddRemove,
+    CreatorTools
   },
   methods: {},
-  props: ["optionList", "roomNumber", "votesPerPerson"],
+  props: [
+    "optionList",
+    "roomNumber",
+    "votesPerPerson",
+    "roomStatus",
+    "totalVotes",
+    "expectedVotes",
+    "userName",
+    "adminName"
+  ]
 };
 </script>
 
 <style scoped>
 .voting-option {
-  padding-right:0px;
+  padding-right: 0px;
   display: block;
   border: none;
+  max-width: 90%
 }
 .text-and-button {
   justify-content: space-between;
@@ -94,5 +110,21 @@ export default {
 }
 .just-text {
   max-width: calc(100% - 95px);
+}
+.vote-list-group {
+  height: 100%;
+  overflow: scroll;
+}
+.vote-component {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.vote-list-group::-webkit-scrollbar {
+  width: 0.3em;
+  background-color: transparent;
+}
+.vote-list-group::-webkit-scrollbar-thumb {
+  background-color: rgb(35, 22, 81);
 }
 </style>
