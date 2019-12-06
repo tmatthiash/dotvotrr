@@ -63,7 +63,9 @@ a {
 .btn-lg {
   background-color: #231651;
   color: white;
-  border-width: 2px;
+  border: none;
+  min-width: 220px;
+  margin-top: 1em;
 }
 .btn-lg:hover {
   background-color: #322074;

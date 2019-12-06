@@ -22,9 +22,6 @@ export default {
     rgba(35, 22, 81, 1) 31%,
     rgba(49, 31, 115, 1) 100%
   );
-  border-width: 5px 0px;
-  border-style: solid;
-  border-color: gray;
   color: white;
 }
 </style>
