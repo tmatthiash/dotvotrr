@@ -61,7 +61,7 @@ a {
   color: #42b983;
 }
 .btn-lg {
-  background-color: #231651;
+  background-color: #0d2c54;
   color: white;
   border: none;
   min-width: 220px;

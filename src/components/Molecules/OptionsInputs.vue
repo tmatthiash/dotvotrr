@@ -107,7 +107,7 @@ export default {
   }
 }
 #add-option {
-  color: rgb(35, 22, 81);
+  color: #0d2c54;
   background-color: white;
   border-width: 0px;
   font-weight: 700;
@@ -144,6 +144,6 @@ export default {
   background-color: transparent;
 }
 .option-list-holder::-webkit-scrollbar-thumb {
-  background-color: rgb(35, 22, 81);
+  background-color: #0d2c54;
 }
 </style>

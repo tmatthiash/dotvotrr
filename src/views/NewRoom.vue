@@ -95,7 +95,7 @@ export default {
   width: 100%;
 }
 #submit-button {
-  background-color: rgb(35, 22, 81);
+  background-color: #0d2c54;
   border-width: 0px;
 }
 </style>

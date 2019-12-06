@@ -84,12 +84,12 @@ export default {
 
 .minusSymbol {
   position: inherit;
-  margin-top: -11px;
+  margin-top: -10px;
 }
 
 .addSymbol {
   position: inherit;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 
 .doubleButton {

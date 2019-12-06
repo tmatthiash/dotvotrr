@@ -27,16 +27,11 @@ export default {
   width:100%;
 }
 #nav-bar {
-  background-color: rgb(35, 22, 81);
-  background-color: linear-gradient(
-    90deg,
-    rgba(35, 22, 81, 1) 31%,
-    rgba(49, 31, 115, 1) 100%
-  );
+  background-color: #0d2c54;
 }
 #home-button {
     color: white;
-    background-color: rgb(35, 22, 81);
+    background-color: #0d2c54;
     border: 0px;    
     font-weight:600;
 }
