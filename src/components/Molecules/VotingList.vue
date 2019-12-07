@@ -6,16 +6,6 @@
         <div class="text-and-button">
           <div class="just-text">{{option}}</div>
           <div>
-            <!-- <b-badge
-              pill
-              v-if="voteList.filter(op => op === option).length"
-              class="voting-badge"
-            >{{voteList.filter(op => op === option).length}}</b-badge>-->
-            <!-- <b-button
-              :disabled="voteList.length >= votesPerPerson"
-              class="voting-button"
-              @click="vote(option)"
-            >Vote</b-button>-->
             <AddRemove :roomNumber="roomNumber" :option="option" :votesPerPerson="votesPerPerson" />
           </div>
         </div>
