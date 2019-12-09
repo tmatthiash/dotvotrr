@@ -1,7 +1,7 @@
 <template>
   <div class="creator-tools">
     <div v-if="roomStatus===RoomStatuses.addingOptions">
-      <b-button id="start-vote" size="md" variant="primary" @click="advanceVoting">Start the voting</b-button>
+      <b-button id="start-vote" size="md" variant="primary" :disabled="optionList.length < 2" @click="advanceVoting">Start the voting</b-button>
     </div>
     <div v-if="roomStatus===RoomStatuses.dotVoting">
       <p>{{totalVotes}} votes recorded out of expected {{expectedVotes}}</p>
@@ -17,7 +17,7 @@ import { api_url, backend_port } from "../../config";
 
 export default {
   name: "CreatorTools",
-  props: ["roomNumber", "roomStatus", "totalVotes", "expectedVotes"],
+  props: ["roomNumber", "roomStatus", "totalVotes", "expectedVotes", "optionList"],
   computed: {
     RoomStatuses() {
       return RoomStatuses.RoomStatuses;

@@ -33,6 +33,7 @@
       :roomNumber="roomNumber"
       :totalVotes="totalVotes"
       :expectedVotes="expectedVotes"
+      :optionList="optionList"
     />
   </div>
 </template>
