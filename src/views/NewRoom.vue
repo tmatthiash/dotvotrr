@@ -91,6 +91,9 @@ export default {
 .NewRoom {
   top: 3em;
   position: absolute;
+  height: -moz-calc(100vh - 3em);
+  height: -webkit-calc(100vh - 3em);
+  height: -o-calc(100vh - 3em);
   height: calc(100vh - 3em);
   width: 100%;
 }
