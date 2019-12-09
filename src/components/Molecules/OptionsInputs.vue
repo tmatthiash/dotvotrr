@@ -3,10 +3,7 @@
     <div class="option-input">
       {{roomName}}
       <b-form @submit="onSubmit">
-        <b-form-group
-          :state="optionState"
-          invalid-feedback="Cannot be blank"
-        >
+        <b-form-group :state="optionState" invalid-feedback="Cannot be blank">
           <b-form-input id="option-input" v-model="newOption" :state="optionState" required></b-form-input>
         </b-form-group>
         <b-button id="add-option" type="submit" variant="primary">ADD OPTIONS</b-button>
@@ -21,7 +18,12 @@
     <div class="flex-holder">
       <div class="option-list-holder">
         <ul class="option-list">
-          <li v-for="(option, index) in optionList" :key="index">{{ option }}</li>
+          <li class="each-option" v-for="(option, index) in optionList" :key="index">
+            <div v-if="adminName===userName" class="close-button-holder">
+              <img @click="removeModal(option)" src="../../assets/circleX.svg" alt="remove option" />
+            </div>
+            {{ option }}
+          </li>
         </ul>
       </div>
     </div>
@@ -75,6 +77,28 @@ export default {
         newOption
       });
       this.newOption = "";
+    },
+    removeModal(option) {
+      const { roomNumber } = this;
+      this.$bvModal
+        .msgBoxConfirm("Are you sure you want to remove option?", {
+          title: "Confirmation",
+          size: "sm",
+          buttonSize: "sm",
+          cancelTitle: "Keep",
+          okTitle: "Remove",
+          headerClass: "p-2 border-bottom-0",
+          footerClass: "p-2 border-top-0",
+          centered: true
+        })
+        .then(value => {
+          if (value) {
+            this.socket.emit("REMOVE_OPTION", {
+              roomNumber,
+              option
+            });
+          }
+        });
     }
   }
 };
@@ -132,11 +156,12 @@ export default {
   list-style-type: none;
   display: block;
   text-align: left;
-  font-size: 18px;
+  font-size: 21px;
+  padding-left: 10px;
 }
 .option-span {
   text-align: left;
-  font-size: 110%;
+  font-size: 130%;
   margin-top: 3em;
 }
 .option-list-holder::-webkit-scrollbar {
@@ -145,5 +170,12 @@ export default {
 }
 .option-list-holder::-webkit-scrollbar-thumb {
   background-color: #0d2c54;
+}
+.each-option {
+  display: flex;
+  padding-top: 20px;
+}
+.close-button-holder {
+  width: 40px;
 }
 </style>

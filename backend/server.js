@@ -172,6 +172,27 @@ io.on("connection", function(socket) {
     io.to(roomNumber).emit("UPDATED_OPTIONS", updatedOptions);
   });
 
+  socket.on("REMOVE_OPTION", function(data) {
+    console.log("removing option");
+    const { option, roomNumber } = data;
+    const foundRoom = Rooms.find(
+      room => room.roomNumber === parseInt(roomNumber)
+    );
+    if (!foundRoom) {
+      return;
+    }
+    console.log("old Options", foundRoom.options);
+    const updatedOptions = foundRoom.options.filter(op => op !== option);
+    const updatedRoom = {
+      ...foundRoom,
+      options: updatedOptions
+    };
+    Rooms = Rooms.filter(rm => rm.roomNumber !== roomNumber);
+    Rooms.push(updatedRoom);
+    console.log("UpdatedOptions", updatedOptions);
+    io.to(roomNumber).emit("UPDATED_OPTIONS", updatedOptions);
+  });
+
   socket.on("ADVANCE_ROOM", function(data) {
     console.log("advancinig", data);
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === data.roomNumber);
