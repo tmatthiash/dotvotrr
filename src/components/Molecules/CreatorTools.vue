@@ -40,9 +40,9 @@ export default {
 
 <style scoped>
 .creator-tools {
-  bottom: 7px;
+  margin-bottom: 5px;
   width: 100%;
-  left:0px;
+  left: 0px;
   justify-content: center;
 }
 #start-vote {
@@ -54,6 +54,6 @@ export default {
   border-width: 0px;
 }
 p {
-  margin:0px;
+  margin: 0px;
 }
 </style>
