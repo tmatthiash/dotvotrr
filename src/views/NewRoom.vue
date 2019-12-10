@@ -70,6 +70,9 @@ export default {
       this.$store.commit("setRoom", roomNumber);
       this.$store.commit("setUserName", adminName);
     }
+  },
+  mounted() {
+    window.scrollTo(0, 1);
   }
 };
 </script>

@@ -139,6 +139,7 @@ export default {
     this.socket.on("UPDATE_RESULTS", data => {
       this.$store.commit("setResultList", data);
     });
+    window.scrollTo(0, 1);
   }
 };
 </script>

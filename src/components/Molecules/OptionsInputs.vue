@@ -4,9 +4,9 @@
       {{roomName}}
       <b-form @submit="onSubmit">
         <b-form-group :state="optionState" invalid-feedback="Cannot be blank">
-          <b-form-input id="option-input" v-model="newOption" :state="optionState" required></b-form-input>
+          <b-form-input ref="newInput" id="option-input" v-model="newOption" :state="optionState" required></b-form-input>
         </b-form-group>
-        <b-button id="add-option" type="submit" variant="primary">ADD OPTIONS</b-button>
+        <b-button id="add-option" type="submit" variant="primary">ADD OPTION</b-button>
       </b-form>
     </div>
     <!-- <div class="option-input">
@@ -20,7 +20,7 @@
         <ul class="option-list">
           <li class="each-option" v-for="(option, index) in optionList" :key="index">
             <div v-if="adminName===userName" class="close-button-holder">
-              <img @click="removeModal(option)" src="../../assets/circleX.svg" alt="remove option" />
+              <img @click="removeModal(option)" src="../../assets/X3.svg" alt="remove option" />
             </div>
             {{ option }}
           </li>
@@ -78,6 +78,7 @@ export default {
         newOption
       });
       this.newOption = "";
+      this.$refs.newInput.focus();
     },
     removeModal(option) {
       const { roomNumber } = this;
