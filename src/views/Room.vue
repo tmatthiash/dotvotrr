@@ -86,7 +86,7 @@ export default {
       newUUID: null,
       totalVotes: 0,
       userCount: 1,
-      innerHeight: window.innerHeight
+      innerHeight: document.documentElement.clientHeight
     };
   },
   components: {
@@ -111,7 +111,7 @@ export default {
       this.$store.commit("setUUID", this.newUUID);
     },
     setHeight() {
-      this.innerHeight = window.innerHeight;
+      this.innerHeight = document.documentElement.clientHeight;
     }
   },
   mounted() {

@@ -49,7 +49,7 @@ export default {
       },
       voteNumbers: [1, 2, 3, 4, 5, 6, 7],
       show: true,
-      innerHeight: window.innerHeight
+      innerHeight: document.documentElement.clientHeight
     };
   },  
   components: {
@@ -72,7 +72,7 @@ export default {
       this.$store.commit("setUserName", adminName);
     },
     setHeight(){
-      this.innerHeight = window.innerHeight
+      this.innerHeight = document.documentElement.clientHeight
     }
   },
   mounted() {
