@@ -70,15 +70,16 @@ export default {
       this.$store.commit("setRoom", roomNumber);
       this.$store.commit("setUserName", adminName);
     }
-  },
-  mounted() {
-    window.scrollTo(0, 1);
   }
+  // mounted(){
+  //   console.log(window.innerHeight)
+  // }
 };
 </script>
 
 <style>
 #cardNew {
+  top: 3em;
   margin: 40px;
   border-color: black;
 
@@ -92,12 +93,8 @@ export default {
   padding: 1.7rem;
 }
 .NewRoom {
-  top: 3em;
   position: absolute;
-  height: -moz-calc(100vh - 3em);
-  height: -webkit-calc(100vh - 3em);
-  height: -o-calc(100vh - 3em);
-  height: calc(100vh - 3em);
+  height: 100%;
   width: 100%;
 }
 #submit-button {

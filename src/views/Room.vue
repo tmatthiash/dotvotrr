@@ -139,27 +139,23 @@ export default {
     this.socket.on("UPDATE_RESULTS", data => {
       this.$store.commit("setResultList", data);
     });
-    window.scrollTo(0, 1);
   }
 };
 </script>
 
 <style scoped>
 #roomCard {
-  top: 1em;
+  top: 3em;
   border-color: black;
   border-width: 2px;
   border-radius: 0.25rem;
-  min-height: calc(100vh - 5em);
-  margin-left: 40px;
-  margin-right: 40px;
-  height: 95%;
+  height: calc(100% - 3em - 80px);
+  margin: 40px;
 }
 @media (max-width: 500px) {
   #roomCard {
-    height: 95%;
-    margin-left: 10px;
-    margin-right: 10px;
+    height: calc(100% - 3em - 20px);
+    margin: 10px;
   }
 }
 .topStuffHolder {
@@ -174,11 +170,10 @@ export default {
   flex-grow: 1;
 }
 .Room {
-  top: 3em;
   position: absolute;
-  height: calc(100vh - 3em);
+  height: 100%;
   width: 100%;
-  min-height: 560px;
+  min-height: 620px;
 }
 .room-option-inputs {
   height: calc(100% - 30px - 3em);
