@@ -21,6 +21,7 @@ export default {
   height: 2em;
 }
 .home {
+  overflow: hidden;
   height: 100%;
   position: absolute;
   width: 100%;
