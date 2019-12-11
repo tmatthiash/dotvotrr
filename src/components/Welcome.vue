@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <div style="height: 3em;"/>
     <TopBanner />
     <b-row>
       <b-col lg="6" class="pb-2">
@@ -70,8 +71,5 @@ a {
 .btn-lg:hover {
   background-color: #322074;
   color: white;
-}
-.hello {
-  padding-top: 3em;
 }
 </style>
