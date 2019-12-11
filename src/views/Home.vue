@@ -1,5 +1,5 @@
 <template>
-  <div class="home" :style="`height: ${innerHeight}px`">
+  <div class="home">
     <!-- <div id="padding" /> -->
     <Welcome msg="Vote Bettrr" />
   </div>
@@ -13,24 +13,6 @@ export default {
   name: "home",
   components: {
     Welcome
-  },
-  data() {
-    return {
-      innerHeight: document.documentElement.clientHeight
-    };
-  },
-  methods: {
-    setHeight() {
-      this.innerHeight = document.documentElement.clientHeight;
-    }
-  },
-  mounted() {
-    this.$nextTick(function() {
-      window.addEventListener("resize", this.setHeight);
-    });
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.setHeight);
   }
 };
 </script>
@@ -39,6 +21,7 @@ export default {
   height: 2em;
 }
 .home {
+  height: 100%;
   position: absolute;
   width: 100%;
 }
