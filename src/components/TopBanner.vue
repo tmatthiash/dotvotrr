@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-jumbotron header="Dot Votrr" lead="Vote bettrr">
-      <p>Start a dot vote without having to create an account. Just start a dot vote, share the room number with everyone and get voting.</p>
+      <p>Begin a dot vote without having to create an account. Just start a dot vote, share the room number with everyone and get voting.</p>
     </b-jumbotron>
   </div>
 </template>

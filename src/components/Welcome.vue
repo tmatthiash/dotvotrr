@@ -9,7 +9,7 @@
         </router-link>
       </b-col>
       <b-col lg="6" class="pb-2">
-        <b-button size="lg" @click="openModal">Join A Voting Room</b-button>
+        <b-button size="lg" @click="openModal">Join An Existing Vote</b-button>
       </b-col>
     </b-row>
     <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal" />
