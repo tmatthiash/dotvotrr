@@ -1,5 +1,5 @@
 <template>
-  <div class="Room">
+  <div class="Room" :style="`height: ${innerHeight}px`">
     <Navbar />
     <b-card id="roomCard">
       <div class="topStuffHolder">
@@ -85,7 +85,8 @@ export default {
       adminName: "",
       newUUID: null,
       totalVotes: 0,
-      userCount: 1
+      userCount: 1,
+      innerHeight: window.innerHeight
     };
   },
   components: {
@@ -108,6 +109,9 @@ export default {
     createUUID() {
       this.newUUID = Math.random().toString(24) + new Date();
       this.$store.commit("setUUID", this.newUUID);
+    },
+    setHeight() {
+      this.innerHeight = window.innerHeight;
     }
   },
   mounted() {
@@ -139,6 +143,12 @@ export default {
     this.socket.on("UPDATE_RESULTS", data => {
       this.$store.commit("setResultList", data);
     });
+    this.$nextTick(function() {
+      window.addEventListener("resize", this.setHeight);
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.setHeight);
   }
 };
 </script>
@@ -171,7 +181,7 @@ export default {
 }
 .Room {
   position: absolute;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   min-height: 620px;
 }

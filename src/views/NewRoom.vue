@@ -1,5 +1,5 @@
 <template>
-  <div class="NewRoom">
+  <div class="NewRoom" :style="`height: ${innerHeight}px`">
     <NavBar />
     <!-- <HomeButton /> -->
     <b-card title="Create New Room" id="cardNew">
@@ -48,9 +48,10 @@ export default {
         selectedVoteNumber: 3
       },
       voteNumbers: [1, 2, 3, 4, 5, 6, 7],
-      show: true
+      show: true,
+      innerHeight: window.innerHeight
     };
-  },
+  },  
   components: {
     // HomeButton,
     NavBar
@@ -69,8 +70,21 @@ export default {
       this.$store.commit("setOwnVotes", []);
       this.$store.commit("setRoom", roomNumber);
       this.$store.commit("setUserName", adminName);
+    },
+    setHeight(){
+      this.innerHeight = window.innerHeight
     }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener("resize", this.setHeight);
+    });
+  },
+  beforeDestroy(){
+    window.removeEventListener("resize", this.setHeight)
   }
+
+
   // mounted(){
   //   console.log(window.innerHeight)
   // }
@@ -94,7 +108,7 @@ export default {
 }
 .NewRoom {
   position: absolute;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
 }
 #submit-button {
