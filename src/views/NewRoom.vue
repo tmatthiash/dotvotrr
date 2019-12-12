@@ -51,7 +51,7 @@ export default {
       show: true,
       innerHeight: document.documentElement.clientHeight
     };
-  },  
+  },
   components: {
     // HomeButton,
     NavBar
@@ -71,8 +71,14 @@ export default {
       this.$store.commit("setRoom", roomNumber);
       this.$store.commit("setUserName", adminName);
     },
-    setHeight(){
-      this.innerHeight = document.documentElement.clientHeight
+    setHeight() {
+      if (
+        !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        this.innerHeight = document.documentElement.clientHeight;
+      }
     }
   },
   mounted() {
@@ -80,10 +86,9 @@ export default {
       window.addEventListener("resize", this.setHeight);
     });
   },
-  beforeDestroy(){
-    window.removeEventListener("resize", this.setHeight)
+  beforeDestroy() {
+    window.removeEventListener("resize", this.setHeight);
   }
-
 
   // mounted(){
   //   console.log(window.innerHeight)
