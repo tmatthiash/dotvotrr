@@ -13,7 +13,13 @@ export default {
   },
   methods: {
     setHeight() {
-      this.innerHeight = document.documentElement.clientHeight;
+      if (
+        !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        this.innerHeight = document.documentElement.clientHeight;
+      }
     }
   },
   mounted() {
