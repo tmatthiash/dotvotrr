@@ -72,7 +72,7 @@ a {
   background-color: #322074;
   color: white;
 }
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-height: 500px) {
   .row {
     background-color: orange;
   }
