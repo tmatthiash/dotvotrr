@@ -45,9 +45,9 @@ export default {
       form: {
         RoomName: "",
         UserName: "",
-        selectedVoteNumber: 3
+        selectedVoteNumber: 5
       },
-      voteNumbers: [1, 2, 3, 4, 5, 6, 7],
+      voteNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       show: true,
       innerHeight: document.documentElement.clientHeight
     };
