@@ -157,7 +157,11 @@ io.on("connection", function(socket) {
     if (!foundRoom) {
       return;
     }
-    if (foundRoom.options.filter(op => op === editedNewOption).length !== 0) {
+    if (
+      foundRoom.options.filter(
+        op => op.toLowerCase() === editedNewOption.toLowerCase()
+      ).length !== 0
+    ) {
       return;
     }
     console.log("old Options", foundRoom.options);
