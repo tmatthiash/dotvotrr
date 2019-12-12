@@ -72,7 +72,7 @@ a {
   background-color: #322074;
   color: white;
 }
-@media (orientation: portrait) {
+@media (orientation: landscape) {
   .row {
     background-color: orange;
   }
