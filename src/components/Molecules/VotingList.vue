@@ -131,6 +131,6 @@ h4 {
   width: 100%;
   justify-content: center;
   left: 0;
-  height: 10px
+  height: 20px
 }
 </style>

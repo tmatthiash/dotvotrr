@@ -15,11 +15,7 @@
     <span class="spanPadding">
       <b-badge pill id="voting-badge">{{ownVotes.filter(op => op === option).length}}</b-badge>
     </span>
-    <button
-      class="doubleButton"
-      @click="addVote"
-      :disabled="ownVotes.length >= votesPerPerson"
-    />
+    <button class="doubleButton" @click="addVote" :disabled="ownVotes.length >= votesPerPerson" />
     <b-button
       :disabled="ownVotes.length >= votesPerPerson"
       @click="addVote"
@@ -116,10 +112,12 @@ export default {
   height: 30px;
   width: 30px;
   z-index: 100;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 #minusButtons:disabled {
   background-color: gray;
   border-color: gray;
+  box-shadow: none;
 }
 
 #addButtons {
@@ -132,10 +130,12 @@ export default {
   padding: 0px;
   height: 30px;
   width: 30px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
 #addButtons:disabled {
   background-color: gray;
   border-color: gray;
+  box-shadow: none;
 }
 </style>
