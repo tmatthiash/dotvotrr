@@ -189,6 +189,8 @@ export default {
   height: calc(100% - 30px - 3em);
 }
 .card-body {
+  display: flex;
+  flex-flow: column;
   height: 100%;
 }
 .vote-list-holder {

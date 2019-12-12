@@ -1,6 +1,7 @@
 <template>
   <div class="vote-component">
-    <h4>Vote! You have used {{voteList.length}} of your {{votesPerPerson}}</h4>
+    <!-- <h4>Vote! You have used {{voteList.length}} of your {{votesPerPerson}}</h4> -->
+    <h4>You have {{votesPerPerson-voteList.length}} votes left to use</h4>
     <b-list-group class="vote-list-group">
       <b-list-group-item class="voting-option" v-for="(option, index) in optionList" :key="index">
         <div class="text-and-button">
@@ -113,5 +114,8 @@ export default {
 }
 .vote-list-group::-webkit-scrollbar-thumb {
   background-color: rgb(35, 22, 81);
+}
+H4 {
+  font-size: 1.4rem;
 }
 </style>

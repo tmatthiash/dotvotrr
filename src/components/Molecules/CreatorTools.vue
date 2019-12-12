@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .creator-tools {
-  margin-bottom: 5px;
+  margin-bottom: -10px;
   width: 100%;
   left: 0px;
   justify-content: center;
