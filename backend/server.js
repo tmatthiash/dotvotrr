@@ -30,6 +30,9 @@ app.get("/", (req, res) => {
 });
 
 const generateRoomNumber = () => {
+  if(Rooms.length >= 6000){
+    Rooms = []; // Get fucked hackerman (and whoever else is using this)
+  }
   let newRoomNumber;
   do {
     newRoomNumber = Math.floor(1000 + Math.random() * 9000);

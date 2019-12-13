@@ -93,8 +93,8 @@ export default {
     removeModal(option) {
       const { roomNumber } = this;
       this.$bvModal
-        .msgBoxConfirm(`Are you sure you want to remove option: "${option}`, {
-          title: "Confirmation",
+        .msgBoxConfirm(`Are you sure you want to remove option: "${option}". Only room creators can do this.`, {
+          title: "Confirm",
           size: "sm",
           buttonSize: "sm",
           cancelTitle: "Keep",
