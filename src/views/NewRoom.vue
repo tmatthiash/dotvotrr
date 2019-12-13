@@ -24,7 +24,12 @@
               required
             ></b-form-select>
           </b-form-group>
-          <b-button id="submit-button" type="submit" variant="primary">Submit</b-button>
+          <b-button
+            id="submit-button"
+            :disabled="isSubmitDisabled"
+            type="submit"
+            variant="primary"
+          >Submit</b-button>
         </div>
       </b-form>
     </b-card>
@@ -49,7 +54,8 @@ export default {
       },
       voteNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       show: true,
-      innerHeight: document.documentElement.clientHeight
+      innerHeight: document.documentElement.clientHeight,
+      isSubmitDisabled: false
     };
   },
   components: {
@@ -59,12 +65,20 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      axios
-        .post(`http://${api_url}:${backend_port}/NewRoom/`, this.form)
-        .then(res => {
-          this.setRoomInfo(res.data.roomNumber, res.data.adminName);
-          this.$router.push({ name: "Room" });
-        });
+      this.isSubmitDisabled = true;
+      setTimeout(() => {
+        this.isSubmitDisabled = false;
+      }, 375);
+      document.getElementById("input-1").blur();
+      document.getElementById("input-2").blur();
+      setTimeout(() => {
+        axios
+          .post(`http://${api_url}:${backend_port}/NewRoom/`, this.form)
+          .then(res => {
+            this.setRoomInfo(res.data.roomNumber, res.data.adminName);
+            this.$router.push({ name: "Room" });
+          });
+      }, 400);
     },
     setRoomInfo(roomNumber, adminName) {
       this.$store.commit("setOwnVotes", []);
