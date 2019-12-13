@@ -6,7 +6,7 @@
     @cancel="handleCancel"
     @close="handleCancel"
     no-close-on-backdrop
-    title="Join Existing Room"
+    title="Join Existing Vote Room"
   >
     <!-- <b-modal id="modal-1" @ok="handleOk" title="Join Existing Room Room"> -->
     <form ref="form" @submit.stop.prevent="handleSubmit">
