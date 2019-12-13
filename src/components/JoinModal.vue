@@ -20,7 +20,7 @@
       </b-form-group>
       <b-form-group
         :state="roomNumberState"
-        label="Room Number"
+        label="Room Number (Made by vote starter)"
         label-for="room-number-input"
         invalid-feedback="Room numbers are 4 digit numbers"
       >
