@@ -12,9 +12,12 @@
             {{result.count}}
           </div>
         </div>
-        <div class="spacer" v-for="n in Math.ceil(result.count / 10)" :key="n">
+        <div class="spacer" v-for="n in Math.max(Math.ceil(result.count / 10), 1)" :key="n">
           <div v-for="m in n <= Math.floor(result.count/10) ? 10 : result.count % 10" :key="m">
             <div class="dot-image" />
+          </div>
+          <div v-if="result.count ===0">
+            <img class="nothing-image" src="../../assets/nothing.svg" alt="no votes" />
           </div>
         </div>
       </b-list-group-item>
@@ -90,5 +93,9 @@ img {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+.nothing-image {
+  height: 10px;
+  width: 10px;
 }
 </style>

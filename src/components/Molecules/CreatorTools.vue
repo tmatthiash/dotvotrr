@@ -49,9 +49,15 @@ export default {
   background-color: rgb(35, 22, 81);
   border-width: 0px;
 }
+#start-vote:hover {
+  background-color: #322074;
+}
 #finish-vote {
   background-color: rgb(35, 22, 81);
   border-width: 0px;
+}
+#finish-vote:hover {
+  background-color: #322074;
 }
 p {
   margin: 0px;

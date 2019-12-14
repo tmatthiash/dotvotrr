@@ -134,4 +134,7 @@ export default {
   background-color: #0d2c54;
   border-width: 0px;
 }
+#submit-button:hover {
+  background-color: #322074;
+}
 </style>
