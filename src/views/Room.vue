@@ -19,10 +19,7 @@
           >Results for {{roomName}}!</div>
         </div>
       </div>
-      <div
-        v-if="roomStatus===RoomStatuses.addingOptions"
-        class="room-option-inputs"
-      >
+      <div v-if="roomStatus===RoomStatuses.addingOptions" class="room-option-inputs">
         <OptionsInputs
           :adminName="adminName"
           :userName="userName"
@@ -195,7 +192,7 @@ export default {
   min-height: 620px;
 }
 .room-option-inputs {
-  height: calc(100% - 81px - .5em);
+  height: calc(100% - 81px - 0.5em);
 }
 .card-body {
   display: flex;
@@ -203,6 +200,6 @@ export default {
   height: 100%;
 }
 .vote-list-holder {
-  height: 100%
+  height: 100%;
 }
 </style>
