@@ -203,6 +203,6 @@ export default {
   height: 100%;
 }
 .vote-list-holder {
-  height: calc(100% - 81px - .5em);
+  height: calc(100% - 80px);
 }
 </style>
