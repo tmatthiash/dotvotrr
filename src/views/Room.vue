@@ -195,7 +195,7 @@ export default {
   min-height: 620px;
 }
 .room-option-inputs {
-  height: calc(100% - 81px);
+  height: calc(100% - 81px - .5em);
 }
 .card-body {
   display: flex;

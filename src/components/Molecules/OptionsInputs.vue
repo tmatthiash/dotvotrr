@@ -139,7 +139,7 @@ export default {
 }
 @media (max-width: 500px) {
   .option-input {
-    margin-top: 1em;
+    margin-top: .5em;
   }
 }
 #add-option {
