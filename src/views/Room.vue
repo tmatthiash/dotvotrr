@@ -201,6 +201,6 @@ export default {
   padding-bottom: 0.75em;
 }
 .vote-list-holder {
-  height: calc(100% - 120px);
+  height: calc(100% - 120px - 1em);
 }
 </style>
