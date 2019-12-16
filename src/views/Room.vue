@@ -198,10 +198,9 @@ export default {
   display: flex;
   flex-flow: column;
   height: 100%;
-  padding-bottom: .75em;
+  padding-bottom: 0.75em;
 }
 .vote-list-holder {
-  /* height: calc(100% - 81px - 0.5em); */
-  height: 100%;
+  height: calc(100% - 81px - 0.5em);
 }
 </style>
