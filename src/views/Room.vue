@@ -43,7 +43,7 @@
           :expectedVotes="(userCount*votesPerPerson)"
         />
       </div>
-      <div v-if="roomStatus===RoomStatuses.results" style="height: calc(100% - 105px);">
+      <div v-if="roomStatus===RoomStatuses.results" style="height: calc(100% - 115px);">
         <Results :resultsList="resultList" />
       </div>
     </b-card>
