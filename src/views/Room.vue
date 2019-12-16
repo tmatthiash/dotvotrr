@@ -202,6 +202,6 @@ export default {
 }
 .vote-list-holder {
   /* height: calc(100% - 81px - 0.5em); */
-  height: inherit;
+  height: 100%;
 }
 </style>
