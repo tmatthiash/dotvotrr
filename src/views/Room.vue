@@ -178,7 +178,6 @@ export default {
   padding-bottom: 15px;
   display: flex;
   flex-wrap: wrap;
-  flex-grow: 1;
   border-bottom: 2px solid #ccc9c9;
   margin-bottom: 15px;
 }
@@ -192,7 +191,9 @@ export default {
   min-height: 620px;
 }
 .room-option-inputs {
-  height: calc(100% - 81px - 0.5em);
+  /* height: calc(100% - 81px - 0.5em); */
+  height: 100%;
+  overflow: hidden;
 }
 .card-body {
   display: flex;

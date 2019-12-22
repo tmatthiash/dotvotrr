@@ -157,13 +157,13 @@ export default {
 }
 .option-list-holder {
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   white-space: normal;
 }
 .flex-holder {
   flex: 1;
   min-height: 250px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .option-list {
   list-style-type: none;

@@ -2,7 +2,7 @@
   <div class="vote-component">
     <!-- <h4>Vote! You have used {{voteList.length}} of your {{votesPerPerson}}</h4> -->
     <h4>You have {{votesPerPerson-voteList.length}} votes left to use</h4>
-    <div style="height: 10px; z-index: 5">
+    <div style="height: 20px; z-index: 5">
       <div class="unused-spacer">
         <div v-for="n in votesPerPerson-voteList.length" :key="n">
           <div class="dot-image" />
@@ -108,7 +108,7 @@ export default {
 }
 .vote-list-group {
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .vote-component {
   height: 100%;
