@@ -163,7 +163,6 @@ export default {
 .flex-holder {
   flex: 1;
   min-height: 250px;
-  overflow-y: scroll;
 }
 .option-list {
   list-style-type: none;
