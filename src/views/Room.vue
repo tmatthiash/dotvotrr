@@ -203,5 +203,6 @@ export default {
 }
 .vote-list-holder {
   height: 100%;
+  overflow-y: scroll;
 }
 </style>
