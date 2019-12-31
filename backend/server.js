@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 let Rooms = [];
 
 const ONE_HOUR = 60 * 60 * 1000;
-schedule.scheduleJob("00 * * * *", function() {
+schedule.scheduleJob("00 * * * *", function () {
   const now = new Date();
   console.log("roomcount before: ", Rooms.length);
   Rooms = Rooms.filter(rm => now - rm.createdAtDate < ONE_HOUR * 3);
@@ -29,8 +29,13 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve("../dist/index.html"));
 });
 
+app.get("/sitemap.xml", (req, res) => {
+  const path = require("path");
+  res.sendFile(path.resolve("../public/sitemap.xml"));
+});
+
 const generateRoomNumber = () => {
-  if(Rooms.length >= 6000){
+  if (Rooms.length >= 6000) {
     Rooms = []; // Get fucked hackerman (and whoever else is using this)
   }
   let newRoomNumber;
@@ -99,13 +104,13 @@ const resultBuilder = roomNumber => {
   return result;
 };
 
-const server = app.listen(PORT, function() {
+const server = app.listen(PORT, function () {
   console.log("Server is running on Port: " + PORT);
 });
 
 const io = require("socket.io")(server);
-io.on("connection", function(socket) {
-  socket.on("join", function(data) {
+io.on("connection", function (socket) {
+  socket.on("join", function (data) {
     const { roomNumber, userName, effectiveUUID } = data;
     const editedName = nameChanger(userName);
     console.log("joining room: ", roomNumber);
@@ -150,7 +155,7 @@ io.on("connection", function(socket) {
     }
   });
 
-  socket.on("ADD_OPTION", function(data) {
+  socket.on("ADD_OPTION", function (data) {
     console.log("adding option");
     const { newOption, roomNumber } = data;
     const editedNewOption = nameChanger(newOption);
@@ -179,7 +184,7 @@ io.on("connection", function(socket) {
     io.to(roomNumber).emit("UPDATED_OPTIONS", updatedOptions);
   });
 
-  socket.on("REMOVE_OPTION", function(data) {
+  socket.on("REMOVE_OPTION", function (data) {
     console.log("removing option");
     const { option, roomNumber } = data;
     const foundRoom = Rooms.find(
@@ -200,7 +205,7 @@ io.on("connection", function(socket) {
     io.to(roomNumber).emit("UPDATED_OPTIONS", updatedOptions);
   });
 
-  socket.on("ADVANCE_ROOM", function(data) {
+  socket.on("ADVANCE_ROOM", function (data) {
     console.log("advancinig", data);
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === data.roomNumber);
     if (!foundRoom) {
@@ -227,7 +232,7 @@ io.on("connection", function(socket) {
     io.to(data.roomNumber).emit("SET_ROOM_STATUS", updatedRoom.roomStatus);
   });
 
-  socket.on("CHANGE_VOTE", function(data) {
+  socket.on("CHANGE_VOTE", function (data) {
     const { roomNumber, option, UUID, addingVote } = data;
     const foundRoom = Rooms.find(aRoom => aRoom.roomNumber === roomNumber);
     if (!foundRoom) {
