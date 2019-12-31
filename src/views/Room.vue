@@ -16,7 +16,7 @@
           <div
             v-if="roomStatus===RoomStatuses.results"
             class="room-subtitle"
-          >Results for {{roomName}}!</div>
+          >Results for: {{roomName}}!</div>
         </div>
       </div>
       <div v-if="roomStatus===RoomStatuses.addingOptions" class="room-option-inputs">
@@ -202,6 +202,6 @@ export default {
   padding-bottom: 0.75em;
 }
 .vote-list-holder {
-  height: calc(100% - 120px - 1em);
+  height: 100%;
 }
 </style>
