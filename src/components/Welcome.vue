@@ -3,6 +3,7 @@
     <div style="height: 3em;" />
     <h1 id="dot-label">Dot</h1>
     <h1>Votrr</h1>
+    <h4>A bettrr way to make decisions as a group</h4>
     <StartOptions />
     <!-- <b-row>
       <b-col lg="6" class="pb-2">
@@ -53,7 +54,7 @@ h1 {
   color: #000a16;
 }
 #dot-label {
-  margin-left: -.5rem;
+  margin-left: -0.5rem;
 }
 ul {
   list-style-type: none;
@@ -81,5 +82,10 @@ a {
   .row {
     background-color: orange;
   }
+}
+h4 {
+  font-size: 1.2rem;
+    color: #000a16;
+
 }
 </style>
