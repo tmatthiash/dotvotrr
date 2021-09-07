@@ -1,10 +1,8 @@
 <template>
   <div class="hello">
     <div style="height: 3em;" />
-    <h1 id="dot-label">Dot</h1>
-    <h1>Votrr</h1>
-    <StartOptions />
-    <!-- <b-row>
+    <TopBanner />
+    <b-row>
       <b-col lg="6" class="pb-2">
         <router-link to="/NewRoom">
           <b-button size="lg">Start A New Vote</b-button>
@@ -14,12 +12,13 @@
         <b-button size="lg" @click="openModal">Join An Existing Vote</b-button>
       </b-col>
     </b-row>
-    <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal" />-->
+    <JoinModal v-bind:modalShow="isModalOpen" v-bind:closeModal="closeModal" />
   </div>
 </template>
 
 <script>
-import StartOptions from "../components/Molecules/StartOptions";
+import TopBanner from "./TopBanner.vue";
+import JoinModal from "./JoinModal.vue";
 
 export default {
   name: "Welcome",
@@ -29,7 +28,8 @@ export default {
     };
   },
   components: {
-    StartOptions
+    TopBanner,
+    JoinModal
   },
   methods: {
     openModal() {
@@ -46,14 +46,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  font-size: 6rem;
-  text-align: left;
-  padding-left: 3rem;
-  color: #000a16;
-}
-#dot-label {
-  margin-left: -.5rem;
+h1,
+h2 {
+  font-weight: normal;
 }
 ul {
   list-style-type: none;

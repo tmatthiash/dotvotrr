@@ -45,11 +45,7 @@ export default {
   width: 100vw;
   /* background-color: orange; */
   background: rgb(255, 165, 0);
-  background: linear-gradient(
-    315deg,
-    rgba(255, 165, 0, 1) 0%,
-    rgba(255, 252, 5, 1) 100%
-  );
+  background: linear-gradient(135deg, rgba(255, 165, 0, 1) 45%, #ff6400 100%);
 }
 
 #nav {
