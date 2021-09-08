@@ -98,7 +98,7 @@ export default {
   methods: {
     getRoomInfo() {
       axios
-        .get(`http://${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
+        .get(`${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
         .then(res => {
           this.roomName = res.data.RoomName;
           this.roomStatus = res.data.roomStatus;
