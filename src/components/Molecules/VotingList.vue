@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      socket: io(`${api_url}:${backend_port}`)
+      socket: io(`${api_url}${backend_port}`)
     };
   },
   components: {

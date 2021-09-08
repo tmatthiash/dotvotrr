@@ -77,7 +77,7 @@ export default {
         return;
       }
       axios
-        .get(`${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
+        .get(`${api_url}${backend_port}/NewRoom/${this.roomNumber}`)
         .then(res => {
           if (res.data === false) {
             this.showRoomNumberError = true;

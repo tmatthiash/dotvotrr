@@ -37,7 +37,7 @@ export default {
   props: ["roomNumber", "option", "votesPerPerson"],
   data() {
     return {
-      socket: io(`${api_url}:${backend_port}`)
+      socket: io(`${api_url}${backend_port}`)
     };
   },
   computed: {

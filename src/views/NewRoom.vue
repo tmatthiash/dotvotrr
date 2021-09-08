@@ -73,7 +73,7 @@ export default {
       document.getElementById("input-2").blur();
       setTimeout(() => {
         axios
-          .post(`${api_url}:${backend_port}/NewRoom/`, this.form)
+          .post(`${api_url}${backend_port}/NewRoom/`, this.form)
           .then(res => {
             this.setRoomInfo(res.data.roomNumber, res.data.adminName);
             this.$router.push({ name: "Room" });

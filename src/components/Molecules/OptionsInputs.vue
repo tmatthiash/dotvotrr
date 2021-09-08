@@ -59,7 +59,7 @@ export default {
     return {
       newOption: "",
       optionState: null,
-      socket: io(`${api_url}:${backend_port}`)
+      socket: io(`${api_url}${backend_port}`)
     };
   },
   props: [

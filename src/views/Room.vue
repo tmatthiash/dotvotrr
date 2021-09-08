@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       roomName: "",
-      socket: io(`${api_url}:${backend_port}`),
+      socket: io(`${api_url}${backend_port}`),
       roomStatus: null,
       votesPerPerson: 3,
       adminName: "",
@@ -98,7 +98,7 @@ export default {
   methods: {
     getRoomInfo() {
       axios
-        .get(`${api_url}:${backend_port}/NewRoom/${this.roomNumber}`)
+        .get(`${api_url}${backend_port}/NewRoom/${this.roomNumber}`)
         .then(res => {
           this.roomName = res.data.RoomName;
           this.roomStatus = res.data.roomStatus;
